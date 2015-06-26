@@ -1,0 +1,23 @@
+{
+  "author" : "Stanford Rosenthal",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "handler" : "onRun",
+      // "shortcut" : "option c",
+      "name" : "Sync",
+      "identifier" : "sync"
+    },
+  ],
+  "menu": {
+    "isRoot": true,
+    "items": [
+      "sync",
+    ],
+  },
+  "identifier" : "com.github.nolastan.charts",
+  "version" : "1.0",
+  "description" : "Sync styles and symbols",
+  "authorEmail" : "nolastan@gmail.com",
+  "name" : "Sync"
+}

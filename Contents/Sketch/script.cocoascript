@@ -1,0 +1,50 @@
+var onRun = function(context) {
+  var doc = context.document;
+  var buttons = getButtons();
+  for (var i=0; i < buttons.length; i++) {
+    attrs = buttons[i].fields;
+    var button = createStyle(attrs);
+      doc.currentPage().addLayers([button]);
+  }
+
+  function getButtons() {
+    var request = NSMutableURLRequest.new();
+    [request setHTTPMethod:@"GET"];
+    var queryString = "https://api.airtable.com/v0/appiRtI3ASM4rerem/typography?api_key=[KEY]"
+    [request setURL:[NSURL URLWithString:queryString]];
+
+    var error = NSError.new();
+    var responseCode = null;
+
+    var oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:responseCode error:error];
+
+    var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+
+
+    var data = JSON.parse(dataString);
+
+    return data.records;
+
+  }
+
+  function createStyle(attrs) {
+    var doc = context.document;
+
+    var color = MSColor.colorWithSVGString("#000000");
+    color.alpha = attrs.opacity;
+
+    textLayer = doc.currentPage().addLayerOfType('text');
+
+    textLayer.setFontSize(attrs.size);
+    textLayer.setLineSpacing(attrs.lineSpacing);
+    textLayer.setTextColor(color);
+    textLayer.setFontPostscriptName(attrs.typeface + '-' + attrs.variant);
+    log(textLayer.fontPostscriptName());
+
+    var sharedStyles=doc.documentData().layerTextStyles();
+    sharedStyles.addSharedStyleWithName_firstInstance(attrs.name, textLayer.style());
+
+    doc.currentPage().removeLayer(textLayer);
+  }
+
+};
