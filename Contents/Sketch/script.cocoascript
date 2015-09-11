@@ -1,16 +1,18 @@
 var onRun = function(context) {
   var doc = context.document;
-  var buttons = getButtons();
-  for (var i=0; i < buttons.length; i++) {
-    attrs = buttons[i].fields;
-    var button = createStyle(attrs);
-      doc.currentPage().addLayers([button]);
+  var sharedStyles=doc.documentData().layerTextStyles();
+
+  var data = getData();
+  var styles = parseCSV(data);
+
+  for(var i=0; i<styles.length; i++) {
+  	createStyle(styles[i]);
   }
 
-  function getButtons() {
+  function getData() {
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
-    var queryString = "https://api.airtable.com/v0/appiRtI3ASM4rerem/typography?api_key=[KEY]"
+    var queryString = "https://docs.google.com/spreadsheets/d/1dVLIh26DUdLmm12decz6nWaJpAH-uG6XpuqRwbwTQ_w/pub?output=csv"
     [request setURL:[NSURL URLWithString:queryString]];
 
     var error = NSError.new();
@@ -18,33 +20,52 @@ var onRun = function(context) {
 
     var oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:responseCode error:error];
 
-    var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
-
-
-    var data = JSON.parse(dataString);
-
-    return data.records;
-
+    return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
   }
 
-  function createStyle(attrs) {
+  function parseCSV(csv){
+
+    var lines=csv.split("\n");
+    var result = [];
+
+    var headers=lines[0].split(",");
+
+    for(var i=1;i<lines.length;i++){
+
+      var obj = {};
+      var currentLine=lines[i].split(",");
+      for(var j=0;j<headers.length;j++){
+	    var header = headers[j];
+        obj[header] = currentLine[j];
+      }
+
+      result.push(obj);
+
+    }
+
+    return result;
+  }
+
+
+  function createStyle(style) {
+  	if(style.TextAppearance == "") { return; }
     var doc = context.document;
 
-    var color = MSColor.colorWithSVGString("#000000");
-    color.alpha = attrs.opacity;
+    var color = MSColor.colorWithSVGString("#" + style.TextColor);
+    if(style.Opacity) { color.alpha = style.Opacity; }
 
     textLayer = doc.currentPage().addLayerOfType('text');
 
-    textLayer.setFontSize(attrs.size);
-    textLayer.setLineSpacing(attrs.lineSpacing);
+    textLayer.setFontSize(style.TextSize);
+    textLayer.setLineSpacing(style.LineHeight);
     textLayer.setTextColor(color);
-    textLayer.setFontPostscriptName(attrs.typeface + '-' + attrs.variant);
-    log(textLayer.fontPostscriptName());
+    textLayer.setFontPostscriptName(style.FontFamily);
 
-    var sharedStyles=doc.documentData().layerTextStyles();
-    sharedStyles.addSharedStyleWithName_firstInstance(attrs.name, textLayer.style());
+    sharedStyles.addSharedStyleWithName_firstInstance(style.TextAppearance, textLayer.style());
 
     doc.currentPage().removeLayer(textLayer);
   }
 
-};
+}
+
+onRun(context);

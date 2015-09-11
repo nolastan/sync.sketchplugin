@@ -1,2 +1,2 @@
-# Sketch-Charts
-Quickly insert charts into Sketch
+# Sync Sketch Plugin
+Save your styles to the cloud to keep your team in sync!

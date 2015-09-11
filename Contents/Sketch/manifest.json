@@ -4,7 +4,7 @@
     {
       "script" : "script.cocoascript",
       "handler" : "onRun",
-      // "shortcut" : "option c",
+      "shortcut" : "option s",
       "name" : "Sync",
       "identifier" : "sync"
     },
@@ -15,7 +15,7 @@
       "sync",
     ],
   },
-  "identifier" : "com.github.nolastan.charts",
+  "identifier" : "com.github.nolastan.sync",
   "version" : "1.0",
   "description" : "Sync styles and symbols",
   "authorEmail" : "nolastan@gmail.com",
