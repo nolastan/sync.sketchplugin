@@ -2,11 +2,42 @@ var onRun = function(context) {
   var doc = context.document;
   var sharedStyles=doc.documentData().layerTextStyles();
 
-  var data = getData();
-  var styles = parseCSV(data);
+  removeAllStyles();
+
+  // var data = getData();
+  // var styles = parseCSV(data);
+  var styles = getSheetsu();
 
   for(var i=0; i<styles.length; i++) {
   	createStyle(styles[i]);
+  }
+
+  function removeAllStyles() {
+    existingStyles = doc.documentData().layerTextStyles().objects();
+
+    while(existingStyles.count() > 0) {
+    	style = existingStyles.objectAtIndex(0);
+    	[existingStyles removeObject:style];
+    }
+  }
+
+  function getSheetsu() {
+    var request = NSMutableURLRequest.new();
+    [request setHTTPMethod:@"GET"];
+    var queryString = "http://sheetsu.com/apis/db114852"
+    [request setURL:[NSURL URLWithString:queryString]];
+
+    var error = NSError.new();
+    var responseCode = null;
+
+    var oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:responseCode error:error];
+
+    var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
+
+
+    var data = JSON.parse(dataString);
+
+    return data.result;
   }
 
   function getData() {
@@ -48,7 +79,7 @@ var onRun = function(context) {
 
 
   function createStyle(style) {
-  	if(style.TextAppearance == "") { return; }
+    if(style.TextAppearance == "") { return; }
     var doc = context.document;
 
     var color = MSColor.colorWithSVGString("#" + style.TextColor);
@@ -67,5 +98,3 @@ var onRun = function(context) {
   }
 
 }
-
-onRun(context);
