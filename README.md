@@ -14,9 +14,9 @@ Save your text styles on Google Sheet and keep your design team in sync.
  - Opacity (e.g. *85*)
  - Typeface (e.g. *SourceSansPro-Semibold*)
 
- 2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your spreadsheet.
+2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your spreadsheet.
 
- 3. Run the Sync command from the plugin menu and paste your Sheetsu URL into the prompt.
+3. Run the Sync command from the plugin menu and paste your Sheetsu URL into the prompt.
 
 All your text styles should now be synced with your spreadsheet. Run the plugin again any time to update.
 
