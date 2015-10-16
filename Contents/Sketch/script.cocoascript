@@ -6,8 +6,6 @@ var onRun = function(context) {
   showOptions();
   removeAllStyles();
 
-  // var data = getData();
-  // var styles = parseCSV(data);
   var styles = getSheetsu();
 
   for(var i=0; i<styles.length; i++) {
@@ -41,20 +39,6 @@ var onRun = function(context) {
     return data.result;
   }
 
-  function getData() {
-    var request = NSMutableURLRequest.new();
-    [request setHTTPMethod:@"GET"];
-    var queryString = "https://docs.google.com/spreadsheets/d/1dVLIh26DUdLmm12decz6nWaJpAH-uG6XpuqRwbwTQ_w/pub?output=csv"
-    [request setURL:[NSURL URLWithString:queryString]];
-
-    var error = NSError.new();
-    var responseCode = null;
-
-    var oResponseData = [NSURLConnection sendSynchronousRequest:request returningResponse:responseCode error:error];
-
-    return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
-  }
-
   function showOptions() {
     var alert = [NSAlert alertWithMessageText: "Sync text styles"
                                    defaultButton:"Sync"
@@ -62,39 +46,14 @@ var onRun = function(context) {
                                      otherButton:nil
                        informativeTextWithFormat:"Enter the URL where your styles live."];
 
-    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
-    input.setStringValue("http://sheetsu.com/apis/db114852");
+    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
+    input.setStringValue("https://sheetsu.com/apis/a49fa7c8");
     input.autorelease();
     alert.setAccessoryView(input);
     var button = alert.runModal();
     input.validateEditing();
     queryString = input.stringValue();
   }
-
-
-  // function parseCSV(csv){
-  //
-  //   var lines=csv.split("\n");
-  //   var result = [];
-  //
-  //   var headers=lines[0].split(",");
-  //
-  //   for(var i=1;i<lines.length;i++){
-  //
-  //     var obj = {};
-  //     var currentLine=lines[i].split(",");
-  //     for(var j=0;j<headers.length;j++){
-	//     var header = headers[j];
-  //       obj[header] = currentLine[j];
-  //     }
-  //
-  //     result.push(obj);
-  //
-  //   }
-  //
-  //   return result;
-  // }
-
 
   function createStyle(style) {
     if(style.Style == "") { return; }
