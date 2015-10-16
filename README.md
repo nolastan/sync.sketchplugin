@@ -1,20 +1,14 @@
 # Sync Sketch Plugin
-Save your text styles on Google Sheet and keep your design team in sync.
+Save your text styles in a Google Sheet and keep your design team in sync. Every time you run this plugin your Sketch text styles will be replaced with those you specify in a spreadsheet. This should make it easier to share typography styles across teams!
 
 # Installation
-[Download the zip](https://github.com/nolastan/sync.sketchplugin/archive/master.zip), unzip it, and rename the folder to "sync.sketchplugin". It should now have a Sketch icon. Open the file and the plugin will install.
+[Download the zip](https://github.com/nolastan/sync.sketchplugin/archive/master.zip) and unzip it. Remove "-master" from the name (added by Github) and open the file to install the plugin.
 
 # Getting started
 
-1. Create a Google Sheet with the following columns. Fill each row with your text styles.
- - Style (e.g. *Headline 1*)
- - Size (e.g. *32*)
- - Line (e.g. *40*)
- - Color (e.g. *DD2E1F*)
- - Opacity (e.g. *85*)
- - Typeface (e.g. *SourceSansPro-Semibold*)
+1. Create a Google Sheet from [this template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public).
 
-2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your spreadsheet.
+2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your new sheet.
 
 3. Run the Sync command from the plugin menu and paste your Sheetsu URL into the prompt.
 
