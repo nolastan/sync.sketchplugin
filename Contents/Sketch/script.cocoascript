@@ -1,12 +1,12 @@
 var onRun = function(context) {
   var doc = context.document;
   var sharedStyles=doc.documentData().layerTextStyles();
-  var queryString;
+  var dict = NSThread.mainThread().threadDictionary();
 
   showOptions();
   removeAllStyles();
 
-  var styles = getSheetsu();
+  var styles = getSheetsu(dict['syncSource']);
 
   for(var i=0; i<styles.length; i++) {
   	createStyle(styles[i]);
@@ -21,10 +21,10 @@ var onRun = function(context) {
     }
   }
 
-  function getSheetsu() {
+  function getSheetsu(queryURL) {
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
-    [request setURL:[NSURL URLWithString:queryString]];
+    [request setURL:[NSURL URLWithString:queryURL]];
 
     var error = NSError.new();
     var responseCode = null;
@@ -47,12 +47,12 @@ var onRun = function(context) {
                        informativeTextWithFormat:"Enter the URL where your styles live."];
 
     var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
-    input.setStringValue("https://sheetsu.com/apis/a49fa7c8");
+    input.setStringValue(dict['syncSource'] || "https://sheetsu.com/apis/a49fa7c8");
     input.autorelease();
     alert.setAccessoryView(input);
     var button = alert.runModal();
     input.validateEditing();
-    queryString = input.stringValue();
+    dict['syncSource'] = input.stringValue();
   }
 
   function createStyle(style) {
