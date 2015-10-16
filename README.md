@@ -6,15 +6,9 @@ Save your text styles on Google Sheet and keep your design team in sync.
 
 # Getting started
 
-1. Create a Google Sheet with the following columns. Fill each row with your text styles.
- - Style (e.g. *Headline 1*)
- - Size (e.g. *32*)
- - Line (e.g. *40*)
- - Color (e.g. *DD2E1F*)
- - Opacity (e.g. *85*)
- - Typeface (e.g. *SourceSansPro-Semibold*)
+1. Create a Google Sheet from [this template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public).
 
-2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your spreadsheet.
+2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your new sheet.
 
 3. Run the Sync command from the plugin menu and paste your Sheetsu URL into the prompt.
 
