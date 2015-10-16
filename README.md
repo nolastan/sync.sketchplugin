@@ -1,5 +1,5 @@
 # Sync Sketch Plugin
-Save your text styles on Google Sheet and keep your design team in sync.
+Save your text styles in a Google Sheet and keep your design team in sync.
 
 # Installation
 [Download the zip](https://github.com/nolastan/sync.sketchplugin/archive/master.zip), unzip it, and rename the folder to "sync.sketchplugin". It should now have a Sketch icon. Open the file and the plugin will install.
