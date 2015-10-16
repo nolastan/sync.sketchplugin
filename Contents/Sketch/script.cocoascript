@@ -1,7 +1,9 @@
 var onRun = function(context) {
   var doc = context.document;
   var sharedStyles=doc.documentData().layerTextStyles();
+  var queryString;
 
+  showOptions();
   removeAllStyles();
 
   // var data = getData();
@@ -24,7 +26,6 @@ var onRun = function(context) {
   function getSheetsu() {
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
-    var queryString = "http://sheetsu.com/apis/db114852"
     [request setURL:[NSURL URLWithString:queryString]];
 
     var error = NSError.new();
@@ -54,45 +55,61 @@ var onRun = function(context) {
     return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
   }
 
-  function parseCSV(csv){
+  function showOptions() {
+    var alert = [NSAlert alertWithMessageText: "Sync text styles"
+                                   defaultButton:"Sync"
+                                 alternateButton:"Cancel"
+                                     otherButton:nil
+                       informativeTextWithFormat:"Enter the URL where your styles live."];
 
-    var lines=csv.split("\n");
-    var result = [];
-
-    var headers=lines[0].split(",");
-
-    for(var i=1;i<lines.length;i++){
-
-      var obj = {};
-      var currentLine=lines[i].split(",");
-      for(var j=0;j<headers.length;j++){
-	    var header = headers[j];
-        obj[header] = currentLine[j];
-      }
-
-      result.push(obj);
-
-    }
-
-    return result;
+    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
+    input.setStringValue("http://sheetsu.com/apis/db114852");
+    input.autorelease();
+    alert.setAccessoryView(input);
+    var button = alert.runModal();
+    input.validateEditing();
+    queryString = input.stringValue();
   }
 
 
-  function createStyle(style) {
-    if(style.TextAppearance == "") { return; }
-    var doc = context.document;
+  // function parseCSV(csv){
+  //
+  //   var lines=csv.split("\n");
+  //   var result = [];
+  //
+  //   var headers=lines[0].split(",");
+  //
+  //   for(var i=1;i<lines.length;i++){
+  //
+  //     var obj = {};
+  //     var currentLine=lines[i].split(",");
+  //     for(var j=0;j<headers.length;j++){
+	//     var header = headers[j];
+  //       obj[header] = currentLine[j];
+  //     }
+  //
+  //     result.push(obj);
+  //
+  //   }
+  //
+  //   return result;
+  // }
 
-    var color = MSColor.colorWithSVGString("#" + style.TextColor);
-    if(style.Opacity) { color.alpha = style.Opacity; }
+
+  function createStyle(style) {
+    if(style.Style == "") { return; }
+
+    var color = MSColor.colorWithSVGString("#" + style.Color);
+    color.alpha = style.Opacity;
 
     textLayer = doc.currentPage().addLayerOfType('text');
 
-    textLayer.setFontSize(style.TextSize);
-    textLayer.setLineSpacing(style.LineHeight);
+    textLayer.setFontSize(style.Size);
+    textLayer.setLineSpacing(style.Height);
     textLayer.setTextColor(color);
-    textLayer.setFontPostscriptName(style.FontFamily);
+    textLayer.setFontPostscriptName(style.Typeface);
 
-    sharedStyles.addSharedStyleWithName_firstInstance(style.TextAppearance, textLayer.style());
+    sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
 
     doc.currentPage().removeLayer(textLayer);
   }
