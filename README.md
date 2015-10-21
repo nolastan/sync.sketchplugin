@@ -2,7 +2,7 @@
 Save your text styles in a Google Sheet and keep your design team in sync. Every time you run this plugin your Sketch text styles will be replaced with those you specify in a spreadsheet. This should make it easier to share typography styles across teams!
 
 # Installation
-[Download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.0/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
+Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.0/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
 
 # Getting started
 
