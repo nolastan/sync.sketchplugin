@@ -14,6 +14,8 @@ Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [downl
 
 All your text styles should now be synced with your spreadsheet. Run the plugin again any time to update. Share your Sheetsu URL with your team to stay in sync.
 
+Need help? [Ping me on Twitter](https://twitter.com/stan)
+
 # Custom API
 As an alternative to Google Sheets, you can create a custom JSON api with the following structure:
 ```
