@@ -3,6 +3,13 @@ var onRun = function(context) {
   var sharedStyles=doc.documentData().layerTextStyles();
   var dict = NSThread.mainThread().threadDictionary();
 
+  var alignmentHash = {
+    'left': 0,
+    'right': 1,
+    'center': 2,
+    'justified': 3
+  }
+
   showOptions();
   removeAllStyles();
 
@@ -64,7 +71,9 @@ var onRun = function(context) {
     textLayer = doc.currentPage().addLayerOfType('text');
 
     textLayer.setFontSize(style.Size);
-    textLayer.setLineSpacing(style.Height);
+    textLayer.setLineSpacing(style.Line);
+    textLayer.setCharacterSpacing(style.Character);
+    textLayer.setTextAlignment(alignmentHash[style.Alignment]);
     textLayer.setTextColor(color);
     textLayer.setFontPostscriptName(style.Typeface);
 
