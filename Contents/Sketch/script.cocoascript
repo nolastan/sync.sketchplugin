@@ -36,7 +36,6 @@ var onRun = function(context) {
 
     var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
     input.setStringValue(dict['syncSource'] || "https://sheetsu.com/apis/a49fa7c8");
-    input.autorelease();
     alert.setAccessoryView(input);
     var button = alert.runModal();
     input.validateEditing();
