@@ -7,7 +7,7 @@ var onRun = function(context) {
 
   var styles = getSheetsu(dict['syncSource']);
 
-  loadTypography(styles, context);
+  loadTypography(styles, doc.documentData().layerTextStyles());
 
   function getSheetsu(queryURL) {
     var request = NSMutableURLRequest.new();

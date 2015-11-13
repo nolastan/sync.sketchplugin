@@ -1,6 +1,4 @@
-var loadTypography = function (styles, context) {
-  var doc = context.document;
-  var sharedStyles=doc.documentData().layerTextStyles(); // TODO DRY
+var loadTypography = function (newStyles, sharedStyles) {
 
   var alignmentHash = {
     'left': 0,
@@ -11,8 +9,8 @@ var loadTypography = function (styles, context) {
 
   removeAllStyles();
 
-  for(var i=0; i<styles.length; i++) {
-    createStyle(styles[i]);
+  for(var i=0; i<newStyles.length; i++) {
+    createStyle(newStyles[i]);
   }
 
   function createStyle(style) {
@@ -21,7 +19,7 @@ var loadTypography = function (styles, context) {
     var color = MSColor.colorWithSVGString("#" + style.Color);
     color.alpha = style.Opacity;
 
-    textLayer = doc.currentPage().addLayerOfType('text');
+    textLayer = [[MSTextLayer alloc] initWithFrame:nil];
 
     textLayer.setFontSize(style.Size);
     textLayer.setLineSpacing(style.Line);
@@ -31,12 +29,10 @@ var loadTypography = function (styles, context) {
     textLayer.setFontPostscriptName(style.Typeface);
 
     sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
-
-    doc.currentPage().removeLayer(textLayer);
   }
 
   function removeAllStyles() {
-    var existingStyles = doc.documentData().layerTextStyles().objects();
+    var existingStyles = sharedStyles.objects();
 
     while(existingStyles.count() > 0) {
       style = existingStyles.objectAtIndex(0);
