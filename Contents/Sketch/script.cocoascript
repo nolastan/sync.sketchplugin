@@ -1,6 +1,7 @@
 @import 'typography.js';
 
 var onRun = function(context) {
+  var doc = context.document;
   var dict = NSThread.mainThread().threadDictionary();
 
   showOptions();
@@ -8,6 +9,8 @@ var onRun = function(context) {
   var styles = getSheetsu(dict['syncSource']);
 
   loadTypography(styles, doc.documentData().layerTextStyles());
+
+  doc.showMessage('Sync complete!');
 
   function getSheetsu(queryURL) {
     var request = NSMutableURLRequest.new();

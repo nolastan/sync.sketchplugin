@@ -16,17 +16,18 @@ var loadTypography = function (newStyles, sharedStyles) {
   function createStyle(style) {
     if(style.Style == "") { return; }
 
-    var color = MSColor.colorWithSVGString("#" + style.Color);
-    color.alpha = style.Opacity;
+    var textLayer = [[MSTextLayer alloc] initWithFrame:nil];
 
-    textLayer = [[MSTextLayer alloc] initWithFrame:nil];
-
-    textLayer.setFontSize(style.Size);
-    textLayer.setLineSpacing(style.Line);
-    textLayer.setCharacterSpacing(style.Character);
-    textLayer.setTextAlignment(alignmentHash[style.Alignment]);
-    textLayer.setTextColor(color);
-    textLayer.setFontPostscriptName(style.Typeface);
+    if("Size"      in style)  { textLayer.setFontSize(style.Size); }
+    if("Line"      in style)  { textLayer.setLineSpacing(style.Line); }
+    if("Character" in style)  { textLayer.setCharacterSpacing(style.Character); }
+    if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
+    if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
+    if("Color"     in style)  {
+      var color = MSColor.colorWithSVGString("#" + style.Color);
+      color.alpha = style.Opacity;
+      textLayer.setTextColor(color);
+    }
 
     sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
   }
