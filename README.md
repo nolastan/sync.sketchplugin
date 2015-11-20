@@ -16,6 +16,10 @@ All your text styles should now be synced with your spreadsheet. Run the plugin 
 
 Need help? [Ping me on Twitter](https://twitter.com/stan)
 
+# Pattern Libraries
+[Share your pattern library](https://github.com/nolastan/sync.sketchplugin/issues/new?title=Add%20library&body=I%27d%20like%20to%20add%20this%20library%20I%20created:%20) with the Sync community.
+* [Material Design](https://sheetsu.com/apis/592bd16f) ([Download Roboto](https://www.google.com/fonts/specimen/Roboto))
+
 # Custom API
 As an alternative to Google Sheets, you can create a custom JSON api with the following structure:
 ```
