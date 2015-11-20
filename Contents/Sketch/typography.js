@@ -40,7 +40,4 @@ var loadTypography = function (newStyles, sharedStyles) {
       [existingStyles removeObject:style];
     }
   }
-
-
-
 }

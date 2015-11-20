@@ -12,6 +12,8 @@ var onRun = function(context) {
 
   doc.showMessage('Sync complete!');
 
+  updatePanelHack();
+
   function getSheetsu(queryURL) {
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
@@ -43,5 +45,13 @@ var onRun = function(context) {
     var button = alert.runModal();
     input.validateEditing();
     dict['syncSource'] = input.stringValue();
+  }
+
+  function updatePanelHack() {
+    var selection = context.selection;
+    for (var i=0; i < selection.count(); i++) {
+      selection[i].setIsSelected(false);
+      selection[i].setIsSelected(true);
+    }
   }
 }
