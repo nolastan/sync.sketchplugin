@@ -16,7 +16,7 @@ Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [downl
 
 All your text styles should now be synced with your spreadsheet. Run the plugin again any time to update. Share your Sheetsu URL with your team to stay in sync.
 
-**Need help?** [Create an issue](https://github.com/nolastan/sync.sketchplugin/issues/new) or [tweet @stan](https://twitter.com/stan).
+**Need help?** [View the screencast](https://dl.dropboxusercontent.com/s/f4ubqenqz8n5wne/68D4E91B-173A-4AA0-964C-AA7F9EA77AC8-5233-000032842DD067F4.gif?dl=0), [create an issue](https://github.com/nolastan/sync.sketchplugin/issues/new) or [tweet @stan](https://twitter.com/stan).
 
 **Find it useful?** Please [like Sync on Dribbble](https://dribbble.com/shots/2367116-Sync-Sketch-Plugin).
 
