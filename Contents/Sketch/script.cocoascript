@@ -6,7 +6,7 @@ var onRun = function(context) {
 
   showOptions();
 
-  var styles = getSheetsu(dict['syncSource']);
+  var styles = getData(dict['syncSource']);
 
   loadTypography(styles, doc.documentData().layerTextStyles());
 
@@ -14,7 +14,16 @@ var onRun = function(context) {
 
   updatePanelHack();
 
-  function getSheetsu(queryURL) {
+  function getData(queryURL) {
+    // https://docs.google.com/spreadsheets/d/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/pubhtml
+    // https://spreadsheets.google.com/feeds/list/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/2/public/values?alt=json-in-script&callback=nil
+    var isGoogleSheet = queryURL.indexOf("google.com") > -1
+
+    if(isGoogleSheet) {
+      var sheetID=queryURL.substring(queryURL.lastIndexOf("/d/")+3,queryURL.lastIndexOf("/pubhtml"));
+      queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/1/public/values?alt=json";
+    }
+
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:queryURL]];
@@ -26,8 +35,11 @@ var onRun = function(context) {
 
     var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
 
-
     var data = JSON.parse(dataString);
+
+    if(isGoogleSheet) {
+
+    }
 
     return data.result;
   }
