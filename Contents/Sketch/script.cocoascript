@@ -15,8 +15,6 @@ var onRun = function(context) {
   updatePanelHack();
 
   function getData(queryURL) {
-    // https://docs.google.com/spreadsheets/d/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/pubhtml
-    // https://spreadsheets.google.com/feeds/list/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/2/public/values?alt=json-in-script&callback=nil
     var isGoogleSheet = queryURL.indexOf("google.com") > -1
 
     if(isGoogleSheet) {
@@ -38,10 +36,28 @@ var onRun = function(context) {
     var data = JSON.parse(dataString);
 
     if(isGoogleSheet) {
-
+      return formatGoogleResponse(data);
+    } else {
+      return data.result;
     }
 
-    return data.result;
+  }
+
+  function formatGoogleResponse(data) {
+    var result = [];
+    var items = data.feed.entry;
+    for(var i=0; i<items.length; i++) {
+      var item = items[i];
+      var resultItem = {}
+      for(var key in item) {
+        var attr = key.split('gsx$')[1];
+        if(!attr) { continue; }
+        attr = capitalize(attr);
+        resultItem[attr] = item[key]['$t'];
+      }
+      result.push(resultItem);
+    }
+    return result;
   }
 
   function showOptions() {
@@ -51,8 +67,8 @@ var onRun = function(context) {
                                      otherButton:nil
                        informativeTextWithFormat:"Enter the URL where your styles live."];
 
-    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
-    input.setStringValue(dict['syncSource'] || "https://sheetsu.com/apis/a49fa7c8");
+    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 54)];
+    input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/pubhtml");
     alert.setAccessoryView(input);
     var button = alert.runModal();
     input.validateEditing();
@@ -66,4 +82,9 @@ var onRun = function(context) {
       selection[i].setIsSelected(true);
     }
   }
+
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 }
