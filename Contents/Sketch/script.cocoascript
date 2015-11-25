@@ -1,20 +1,40 @@
 @import 'typography.js';
+@import 'colors.js';
 
 var onRun = function(context) {
   var doc = context.document;
   var dict = NSThread.mainThread().threadDictionary();
 
   showOptions();
-
-  var styles = getSheetsu(dict['syncSource']);
-
-  loadTypography(styles, doc.documentData().layerTextStyles());
+  loadFromURL(dict['syncSource']);
 
   doc.showMessage('Sync complete!');
 
   updatePanelHack();
 
-  function getSheetsu(queryURL) {
+  function loadFromURL(queryURL) {
+    var data;
+    if(queryURL.indexOf("google.com") > -1) {
+      var sheetID=queryURL.substring(queryURL.lastIndexOf("/d/")+3,queryURL.lastIndexOf("/"));
+      for(var i = 1; true; i++) {
+        queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/" + i + "/public/values?alt=json";
+        data = request(queryURL);
+        if(data == "Invalid query parameter value for grid_id.") {
+          break;
+        }
+        data = JSON.parse(data);
+        if(data.feed.title.$t == 'Typography') {
+          applyTypography(parseSheetsData(data), doc.documentData().layerTextStyles());
+        } else if (data.feed.title.$t == 'Colors') {
+          applyColors(parseSheetsData(data), doc.documentData());
+        }
+      }
+    } else {
+      applyTypography(request(queryURL).result, doc.documentData().layerTextStyles());
+    }
+  }
+
+  function request(queryURL) {
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:queryURL]];
@@ -26,10 +46,24 @@ var onRun = function(context) {
 
     var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
 
+    return dataString;
+  }
 
-    var data = JSON.parse(dataString);
-
-    return data.result;
+  function parseSheetsData(data) {
+    var result = [];
+    var items = data.feed.entry;
+    for(var i=0; i<items.length; i++) {
+      var item = items[i];
+      var resultItem = {}
+      for(var key in item) {
+        var attr = key.split('gsx$')[1];
+        if(!attr) { continue; }
+        attr = capitalize(attr);
+        resultItem[attr] = item[key]['$t'];
+      }
+      result.push(resultItem);
+    }
+    return result;
   }
 
   function showOptions() {
@@ -39,8 +73,8 @@ var onRun = function(context) {
                                      otherButton:nil
                        informativeTextWithFormat:"Enter the URL where your styles live."];
 
-    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 24)];
-    input.setStringValue(dict['syncSource'] || "https://sheetsu.com/apis/a49fa7c8");
+    var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 54)];
+    input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/pubhtml");
     alert.setAccessoryView(input);
     var button = alert.runModal();
     input.validateEditing();
@@ -54,4 +88,9 @@ var onRun = function(context) {
       selection[i].setIsSelected(true);
     }
   }
+
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 }

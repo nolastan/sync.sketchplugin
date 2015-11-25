@@ -1,4 +1,4 @@
-var loadTypography = function (newStyles, sharedStyles) {
+var applyTypography = function (newStyles, sharedStyles) {
 
   var alignmentHash = {
     'left': 0,
