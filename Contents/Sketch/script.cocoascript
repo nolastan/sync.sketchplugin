@@ -5,25 +5,26 @@ var onRun = function(context) {
   var dict = NSThread.mainThread().threadDictionary();
 
   showOptions();
-
-  var styles = getData(dict['syncSource']);
-
-  loadTypography(styles, doc.documentData().layerTextStyles());
+  loadFromURL(dict['syncSource']);
 
   doc.showMessage('Sync complete!');
 
   updatePanelHack();
 
-  function getData(queryURL) {
+  function loadFromURL(queryURL) {
     if(queryURL.indexOf("google.com") > -1) {
       var sheetID=queryURL.substring(queryURL.lastIndexOf("/d/")+3,queryURL.lastIndexOf("/pubhtml"));
-      for(var i=0; i<items.length; i++) {
-        queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/1/public/values?alt=json";
+      var morePages = true;
+      for(var i=0; moreItems == false; i++) {
+        queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/" + i + "/public/values?alt=json";
         var data = request(queryURL);
-        return formatGoogleResponse(data);
+        if(data.feed.title.$t == 'Typography') {
+          generateTypography(data);
+        }
+        moreItems=false;
       }
     } else {
-      request(queryURL);
+      applyTypography(request(queryURL).result, doc.documentData().layerTextStyles());
     }
   }
 
@@ -42,25 +43,21 @@ var onRun = function(context) {
     return JSON.parse(dataString);
   }
 
-  function formatGoogleResponse(data) {
+  function generateTypography(data) {
     var result = [];
-    if(data.feed.title.$t == 'Typography') {
-      var items = data.feed.entry;
-      for(var i=0; i<items.length; i++) {
-        var item = items[i];
-        var resultItem = {}
-        for(var key in item) {
-          var attr = key.split('gsx$')[1];
-          if(!attr) { continue; }
-          attr = capitalize(attr);
-          resultItem[attr] = item[key]['$t'];
-        }
-        result.push(resultItem);
+    var items = data.feed.entry;
+    for(var i=0; i<items.length; i++) {
+      var item = items[i];
+      var resultItem = {}
+      for(var key in item) {
+        var attr = key.split('gsx$')[1];
+        if(!attr) { continue; }
+        attr = capitalize(attr);
+        resultItem[attr] = item[key]['$t'];
       }
-    } else if(data.feed.title.$t == 'Colors') {
-      log('Colors');
+      result.push(resultItem);
     }
-    return result;
+    applyTypography(result, doc.documentData().layerTextStyles());
   }
 
   function showOptions() {
