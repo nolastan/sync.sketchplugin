@@ -1,4 +1,5 @@
 @import 'typography.js';
+@import 'colors.js';
 
 var onRun = function(context) {
   var doc = context.document;
@@ -15,11 +16,14 @@ var onRun = function(context) {
     if(queryURL.indexOf("google.com") > -1) {
       var sheetID=queryURL.substring(queryURL.lastIndexOf("/d/")+3,queryURL.lastIndexOf("/pubhtml"));
       var morePages = true;
-      for(var i=0; moreItems == false; i++) {
+      for(var i=1; i <= 2; i++) {
         queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/" + i + "/public/values?alt=json";
+        // log(queryURL);
         var data = request(queryURL);
         if(data.feed.title.$t == 'Typography') {
-          generateTypography(data);
+          applyTypography(parseSheetsData(data), doc.documentData().layerTextStyles());
+        } else if (data.feed.title.$t == 'Colors') {
+          applyColors(parseSheetsData(data), doc.documentData());
         }
         moreItems=false;
       }
@@ -43,7 +47,7 @@ var onRun = function(context) {
     return JSON.parse(dataString);
   }
 
-  function generateTypography(data) {
+  function parseSheetsData(data) {
     var result = [];
     var items = data.feed.entry;
     for(var i=0; i<items.length; i++) {
@@ -57,7 +61,7 @@ var onRun = function(context) {
       }
       result.push(resultItem);
     }
-    applyTypography(result, doc.documentData().layerTextStyles());
+    return result;
   }
 
   function showOptions() {
