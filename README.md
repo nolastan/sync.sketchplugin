@@ -10,11 +10,14 @@ Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [downl
 
 1. Create a Google Sheet from [this template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) (click the "Use this template" button).
 
-2. Visit [Sheetsu](http://sheetsu.com/) and generate an API for your new sheet.
+2. Select *File > Publish to web…* and then click the *Publish* button. Copy the link that appears. (See below if you are using Google Apps at work)
 
-3. Run the Sync command from the plugin menu and paste your Sheetsu URL into the prompt.
+3. Run the Sync command from the plugin menu and paste your URL into the prompt.
 
-All your text styles should now be synced with your spreadsheet. Run the plugin again any time to update. Share your Sheetsu URL with your team to stay in sync.
+Your text styles and color palette should now be synced with your spreadsheet. Run the plugin again any time to update. Share your published sheet URL with your team to stay in sync.
+
+## Using Google Apps at work?
+Some companies prevent employees from publishing sheets. If the *Published content & settings* drill-down in the *Publish to the web* modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit [Sheetsu](http://sheetsu.com/) to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 3.
 
 **Need help?** [View the screencast](https://dl.dropboxusercontent.com/s/f4ubqenqz8n5wne/68D4E91B-173A-4AA0-964C-AA7F9EA77AC8-5233-000032842DD067F4.gif?dl=0), [create an issue](https://github.com/nolastan/sync.sketchplugin/issues/new) or [tweet @stan](https://twitter.com/stan).
 
@@ -25,7 +28,7 @@ All your text styles should now be synced with your spreadsheet. Run the plugin 
 * [Material Design](https://sheetsu.com/apis/592bd16f) ([Download Roboto](https://www.google.com/fonts/specimen/Roboto))
 
 # Custom API
-As an alternative to Google Sheets, you can create a custom JSON api with the following structure:
+As an alternative to Google Sheets, you can create a custom JSON api with the following structure. Currently this method only supports typography.
 ```
 {
   …

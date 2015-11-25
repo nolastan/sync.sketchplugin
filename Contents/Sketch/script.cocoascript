@@ -13,19 +13,21 @@ var onRun = function(context) {
   updatePanelHack();
 
   function loadFromURL(queryURL) {
+    var data;
     if(queryURL.indexOf("google.com") > -1) {
       var sheetID=queryURL.substring(queryURL.lastIndexOf("/d/")+3,queryURL.lastIndexOf("/pubhtml"));
-      var morePages = true;
-      for(var i=1; i <= 2; i++) {
+      for(var i = 1; true; i++) {
         queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/" + i + "/public/values?alt=json";
-        // log(queryURL);
-        var data = request(queryURL);
+        data = request(queryURL);
+        if(data == "Invalid query parameter value for grid_id.") {
+          break;
+        }
+        data = JSON.parse(data);
         if(data.feed.title.$t == 'Typography') {
           applyTypography(parseSheetsData(data), doc.documentData().layerTextStyles());
         } else if (data.feed.title.$t == 'Colors') {
           applyColors(parseSheetsData(data), doc.documentData());
         }
-        moreItems=false;
       }
     } else {
       applyTypography(request(queryURL).result, doc.documentData().layerTextStyles());
@@ -44,7 +46,7 @@ var onRun = function(context) {
 
     var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
 
-    return JSON.parse(dataString);
+    return dataString;
   }
 
   function parseSheetsData(data) {
