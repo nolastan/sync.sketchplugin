@@ -15,13 +15,19 @@ var onRun = function(context) {
   updatePanelHack();
 
   function getData(queryURL) {
-    var isGoogleSheet = queryURL.indexOf("google.com") > -1
-
-    if(isGoogleSheet) {
+    if(queryURL.indexOf("google.com") > -1) {
       var sheetID=queryURL.substring(queryURL.lastIndexOf("/d/")+3,queryURL.lastIndexOf("/pubhtml"));
-      queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/1/public/values?alt=json";
+      for(var i=0; i<items.length; i++) {
+        queryURL = "https://spreadsheets.google.com/feeds/list/" + sheetID + "/1/public/values?alt=json";
+        var data = request(queryURL);
+        return formatGoogleResponse(data);
+      }
+    } else {
+      request(queryURL);
     }
+  }
 
+  function request(queryURL) {
     var request = NSMutableURLRequest.new();
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:queryURL]];
@@ -33,29 +39,26 @@ var onRun = function(context) {
 
     var dataString = [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding];
 
-    var data = JSON.parse(dataString);
-
-    if(isGoogleSheet) {
-      return formatGoogleResponse(data);
-    } else {
-      return data.result;
-    }
-
+    return JSON.parse(dataString);
   }
 
   function formatGoogleResponse(data) {
     var result = [];
-    var items = data.feed.entry;
-    for(var i=0; i<items.length; i++) {
-      var item = items[i];
-      var resultItem = {}
-      for(var key in item) {
-        var attr = key.split('gsx$')[1];
-        if(!attr) { continue; }
-        attr = capitalize(attr);
-        resultItem[attr] = item[key]['$t'];
+    if(data.feed.title.$t == 'Typography') {
+      var items = data.feed.entry;
+      for(var i=0; i<items.length; i++) {
+        var item = items[i];
+        var resultItem = {}
+        for(var key in item) {
+          var attr = key.split('gsx$')[1];
+          if(!attr) { continue; }
+          attr = capitalize(attr);
+          resultItem[attr] = item[key]['$t'];
+        }
+        result.push(resultItem);
       }
-      result.push(resultItem);
+    } else if(data.feed.title.$t == 'Colors') {
+      log('Colors');
     }
     return result;
   }
