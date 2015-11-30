@@ -4,7 +4,7 @@ var applyColors = function (newColors, docData) {
   var colors = [];
   for(var i=0; i<newColors.length; i++) {
     var color = MSColor.colorWithSVGString("#" + newColors[i].Rgb);
-    color.alpha = newColors[i] .Opacity;
+    color.alpha = newColors[i].Opacity;
     colors.push(color);
   }
   colors = MSArray.dataArrayWithArray(colors);
