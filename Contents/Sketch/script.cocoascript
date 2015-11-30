@@ -77,7 +77,7 @@ var onRun = function(context) {
                        informativeTextWithFormat:"Enter the URL where your styles live."];
 
     var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 54)];
-    input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/1LunoLOZbmcyGORV5mCe6qKPdN0NVuosm7lNeSo98-tQ/pubhtml");
+    input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew/pubhtml");
     alert.setAccessoryView(input);
     var button = alert.runModal();
     input.validateEditing();
