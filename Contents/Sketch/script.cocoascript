@@ -10,8 +10,7 @@ var onRun = function(context) {
   loadFromURL(dict['syncSource']);
 
   doc.showMessage('Sync complete!');
-
-  updatePanelHack();
+  doc.reloadInspector();
 
   function loadFromURL(queryURL) {
     var data;
@@ -82,14 +81,6 @@ var onRun = function(context) {
     var button = alert.runModal();
     input.validateEditing();
     dict['syncSource'] = input.stringValue();
-  }
-
-  function updatePanelHack() {
-    var selection = context.selection;
-    for (var i=0; i < selection.count(); i++) {
-      selection[i].setIsSelected(false);
-      selection[i].setIsSelected(true);
-    }
   }
 
   function capitalize(string) {
