@@ -1,5 +1,6 @@
 @import 'typography.js';
 @import 'colors.js';
+@import 'styles.js';
 
 var onRun = function(context) {
   var doc = context.document;
@@ -27,6 +28,8 @@ var onRun = function(context) {
           applyTypography(parseSheetsData(data), doc.documentData().layerTextStyles());
         } else if (data.feed.title.$t == 'Colors') {
           applyColors(parseSheetsData(data), doc.documentData());
+        } else if (data.feed.title.$t == 'Styles') {
+          applyStyles(parseSheetsData(data), doc.documentData().layerStyles());
         }
       }
     } else {
