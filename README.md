@@ -1,7 +1,7 @@
 # Sync Sketch Plugin
 ![](https://i.imgur.com/dUeIJjI.gif)
 
-Save your text styles in a Google Sheet and keep your design team in sync. Every time you run this plugin your Sketch text styles will be replaced with those you specify in a spreadsheet. This should make it easier to share typography styles across teams!
+Save your text styles, layer styles, and color palette in a Google Sheet to keep your design team in sync. Every time you run this plugin your styles and colors will be replaced with those you specify in a spreadsheet. This should make it easier to share typography styles across teams!
 
 # Installation
 Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.1/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
@@ -16,7 +16,7 @@ Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [downl
 
 4. Run the Sync command from the plugin menu and paste your URL into the prompt.
 
-Your text styles and color palette should now be synced with your spreadsheet. Run the plugin again any time to update. Share your published sheet URL with your team to stay in sync.
+Your text styles, layer styles, and color palette should now be synced with your spreadsheet. Run the plugin again any time to update. Share your published sheet URL with your team to stay in sync.
 
 ## Using Google Apps at work?
 Some companies prevent employees from publishing sheets. If the *Published content & settings* drill-down in the *Publish to the web* modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit [Sheetsu](http://sheetsu.com/) to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 4.
