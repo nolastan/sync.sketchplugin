@@ -21,9 +21,11 @@ Your text styles, layer styles, and color palette should now be synced with your
 ## Using Google Apps at work?
 Some companies prevent employees from publishing sheets. If the *Published content & settings* drill-down in the *Publish to the web* modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit [Sheetsu](http://sheetsu.com/) to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 4.
 
-**Need help?** [View the screencast](https://dl.dropboxusercontent.com/s/f4ubqenqz8n5wne/68D4E91B-173A-4AA0-964C-AA7F9EA77AC8-5233-000032842DD067F4.gif?dl=0), [create an issue](https://github.com/nolastan/sync.sketchplugin/issues/new) or [tweet @stan](https://twitter.com/stan).
+## Font Weight
+Font variants—such as bold, italic, or narrow—are actually separate font files on your computer. You should specify these exactly as named in `~/Library/Fonts/` folder on your Mac, *excluding* the file extension (e.g. `ttf`). The [Google Sheet template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) provides an example of this.
 
-**Find it useful?** Please [like Sync on Dribbble](https://dribbble.com/shots/2367116-Sync-Sketch-Plugin).
+## Need help?
+[View the screencast](https://dl.dropboxusercontent.com/s/f4ubqenqz8n5wne/68D4E91B-173A-4AA0-964C-AA7F9EA77AC8-5233-000032842DD067F4.gif?dl=0), [create an issue](https://github.com/nolastan/sync.sketchplugin/issues/new) or [tweet @stan](https://twitter.com/stan).
 
 # Pattern Libraries
 [Share your pattern library](https://github.com/nolastan/sync.sketchplugin/issues/new?title=Add%20library&body=I%27d%20like%20to%20add%20this%20library%20I%20created:%20) with the Sync community.
