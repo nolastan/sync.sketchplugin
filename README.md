@@ -43,7 +43,8 @@ As an alternative to Google Sheets, you can create a custom JSON api with the fo
       Typeface: "SourceSansPro-Semibold",
       Alignment: "center",
       Line: "40",
-      Character: "0"
+      Character: "0",
+      Weight: "400"
     },
     …
   ]

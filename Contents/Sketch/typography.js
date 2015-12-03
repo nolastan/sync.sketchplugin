@@ -23,6 +23,7 @@ var applyTypography = function (newStyles, sharedStyles) {
     if("Character" in style)  { textLayer.setCharacterSpacing(style.Character); }
     if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
+    if("Weight"    in style)  { textLayer.setFontWeight(style.Weight); }
     if("Color"     in style)  {
       var color = MSColor.colorWithSVGString("#" + style.Color);
       color.alpha = style.Opacity;
