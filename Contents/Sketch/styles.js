@@ -24,12 +24,16 @@ var applyStyles = function (newStyles, sharedStyles) {
 
     if(style.Shadow) {
       var shadow = sharedStyle.shadows().addNewStylePart();
-      shadow.color = MSColor.blackColor().colorWithAlpha(style.Shadowopacity);
-      shadowAttr = style.Shadow.split(',');
-      shadow.offsetX    = shadowAttr[0];
-      shadow.offsetY    = shadowAttr[1];
-      shadow.blurRadius = shadowAttr[2];
-      shadow.spread     = shadowAttr[3];
+      var shadowColor = MSColor.colorWithSVGString("#" + style.Shadowcolor);
+      shadow.color = shadowColor.colorWithAlpha(style.Shadowopacity);
+      setShadowAttribute(shadow, style.Shadow);
+    }
+
+    if(style.Innershadow) {
+      var innerShadow = sharedStyle.innerShadows().addNewStylePart();
+      var innerShadowColor = MSColor.colorWithSVGString("#" + style.Innershadowcolor);
+      innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
+      setShadowAttribute(innerShadow, style.Innershadow);
     }
 
     sharedStyles.addSharedStyleWithName_firstInstance(style.Style, sharedStyle);
@@ -42,5 +46,13 @@ var applyStyles = function (newStyles, sharedStyles) {
       style = existingStyles.objectAtIndex(0);
       [existingStyles removeObject:style];
     }
+  }
+
+  function setShadowAttribute(shadow, shadowStyle) {
+    shadowAttr = shadowStyle.split(',');
+    shadow.offsetX    = shadowAttr[0];
+    shadow.offsetY    = shadowAttr[1];
+    shadow.blurRadius = shadowAttr[2];
+    shadow.spread     = shadowAttr[3];
   }
 }
