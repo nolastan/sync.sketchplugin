@@ -6,11 +6,12 @@ var onRun = function(context) {
   var doc = context.document;
   var dict = NSThread.mainThread().threadDictionary();
 
-  showOptions();
-  loadFromURL(dict['syncSource']);
+  if (showOptions() == NSAlertDefaultReturn) {
+    loadFromURL(dict['syncSource']);
 
-  doc.showMessage('Sync complete!');
-  doc.reloadInspector();
+    doc.showMessage('Sync complete!');
+    doc.reloadInspector();
+  }
 
   function loadFromURL(queryURL) {
     var data;
@@ -78,9 +79,9 @@ var onRun = function(context) {
     var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 54)];
     input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew/pubhtml");
     alert.setAccessoryView(input);
-    var button = alert.runModal();
     input.validateEditing();
     dict['syncSource'] = input.stringValue();
+    return alert.runModal();
   }
 
   function capitalize(string) {
