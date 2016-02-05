@@ -69,11 +69,11 @@ var onRun = function(context) {
   }
 
   function showOptions() {
-    var alert = [NSAlert alertWithMessageText: "Sync text styles"
-                                   defaultButton:"Sync"
+    var alert = [NSAlert alertWithMessageText: "Replace styles and colors"
+                                   defaultButton:"Replace"
                                  alternateButton:"Cancel"
                                      otherButton:nil
-                       informativeTextWithFormat:"Enter the URL where your styles live."];
+                       informativeTextWithFormat:"Enter the URL where your styles and/or colors live. Any existing document styles or global colors will be replaced."];
 
     var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 54)];
     input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew/pubhtml");
