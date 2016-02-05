@@ -16,7 +16,7 @@
     ],
   },
   "identifier" : "com.github.nolastan.sync",
-  "version" : "1.1",
+  "version" : "1.2",
   "description" : "Sync styles and symbols",
   "authorEmail" : "nolastan@gmail.com",
   "name" : "Sync"
