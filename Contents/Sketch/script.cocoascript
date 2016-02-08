@@ -6,12 +6,11 @@ var onRun = function(context) {
   var doc = context.document;
   var dict = NSThread.mainThread().threadDictionary();
 
-  if (showOptions() == NSAlertDefaultReturn) {
-    loadFromURL(dict['syncSource']);
+  showOptions();
+  loadFromURL(dict['syncSource']);
 
-    doc.showMessage('Sync complete!');
-    doc.reloadInspector();
-  }
+  doc.showMessage('Sync complete!');
+  doc.reloadInspector();
 
   function loadFromURL(queryURL) {
     var data;
@@ -70,18 +69,18 @@ var onRun = function(context) {
   }
 
   function showOptions() {
-    var alert = [NSAlert alertWithMessageText: "Replace styles and colors"
-                                   defaultButton:"Replace"
+    var alert = [NSAlert alertWithMessageText: "Sync text styles"
+                                   defaultButton:"Sync"
                                  alternateButton:"Cancel"
                                      otherButton:nil
-                       informativeTextWithFormat:"Enter the URL where your styles and/or colors live. Any existing document styles or global colors will be replaced."];
+                       informativeTextWithFormat:"Enter the URL where your styles live."];
 
     var input = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 300, 54)];
     input.setStringValue(dict['syncSource'] || "https://docs.google.com/spreadsheets/d/17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew/pubhtml");
     alert.setAccessoryView(input);
+    var button = alert.runModal();
     input.validateEditing();
     dict['syncSource'] = input.stringValue();
-    return alert.runModal();
   }
 
   function capitalize(string) {
