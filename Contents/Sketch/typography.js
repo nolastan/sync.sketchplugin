@@ -20,7 +20,12 @@ var applyTypography = function (newStyles, sharedStyles) {
 
     if("Size"      in style)  { textLayer.setFontSize(style.Size); }
     if("Line"      in style)  { textLayer.setLineSpacing(style.Line); }
-    if("Character" in style)  { textLayer.setCharacterSpacing(style.Character); }
+
+    if("Character" in style && style.Character)  {
+      var character = parseFloat(style.Character);
+      textLayer.setCharacterSpacing(character);
+    }
+
     if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
     if("Color"     in style)  {
