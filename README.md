@@ -1,3 +1,7 @@
+**Not working in Sketch 39.** [See issue #21.](https://github.com/nolastan/sync.sketchplugin/issues/21)
+
+---
+
 # Sync Sketch Plugin
 ![](https://i.imgur.com/dUeIJjI.gif)
 
