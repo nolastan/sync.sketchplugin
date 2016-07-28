@@ -10,7 +10,7 @@ var applyTypography = function (newStyles, sharedStyles) {
   // removes existing styles before importing 
   // keeps sketch from shitting its pants the the styles already exist
   // probably need to check for matching names though. This will wipe out other existing styles
-  [sharedStyles removeAllSharedObjects];
+  // [sharedStyles removeAllSharedObjects];
 
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
