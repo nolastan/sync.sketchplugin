@@ -26,7 +26,7 @@ var onRun = function(context) {
         if(data.feed.title.$t == 'Typography') {
           applyTypography(parseSheetsData(data), doc.documentData().layerTextStyles());
         } else if (data.feed.title.$t == 'Colors') {
-          applyColors(parseSheetsData(data), doc.documentData());
+          applyColors(parseSheetsData(data), doc.documentData().assets());
         } else if (data.feed.title.$t == 'Styles') {
           applyStyles(parseSheetsData(data), doc.documentData().layerStyles());
         }

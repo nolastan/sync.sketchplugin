@@ -1,4 +1,4 @@
-var applyColors = function (newColors, docData) {
+var applyColors = function (newColors, assetColors) {
   var app = NSApplication.sharedApplication();
   var appController = app.delegate();
   var colors = [];
@@ -7,7 +7,5 @@ var applyColors = function (newColors, docData) {
     color.alpha = newColors[i].Opacity;
     colors.push(color);
   }
-  colors = MSArray.dataArrayWithArray(colors);
-  appController.globalAssets().setPrimitiveColors(colors);
-  appController.globalAssets().objectDidChange();
+  [assetColors addColors:colors];
 }
