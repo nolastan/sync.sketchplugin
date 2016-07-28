@@ -16,6 +16,31 @@ var applyTypography = function (newStyles, sharedStyles) {
     createStyle(newStyles[i]);
   }
 
+  function checkForMatchingStyleAndMerge(existingStyleArray, newStyleName, newStyle) {
+    // log(existingStyleArray);
+    // log(newStyleName);
+    // log(newStyle);
+    var existingStyleObjects = [existingStyleArray objects];
+
+    for (var i=0; i<existingStyleObjects.count(); i++) {
+      var existingName = existingStyleObjects[i].name();
+      // log("existing name is " + existingName);
+      // log("new name is " + newStyleName);
+
+      if(existingName == newStyleName) {
+        // log("name matched");
+        // existingStyleArray.mergeSharedStyleWithName_sharedStyleID_instance( newStyleName, existingStyleArray[i].objectID(), newStyle );
+
+        // existingStyleObjects[i].style().setValue(newStyle);
+        // existingStyleObjects[i].mergeSharedStyleWithName_sharedStyleID_instance( newStyleName, newStyle );
+        return existingStyleObjects[i].objectID();
+      }
+      return false;
+    }
+
+    // should return true or false
+  }
+
   function createStyle(style) {
     if(style.Style == "") { return; }
 
@@ -35,7 +60,17 @@ var applyTypography = function (newStyles, sharedStyles) {
       textLayer.setTextColor(color);
     }
 
-    sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
+    // sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
+    var matchedStyleID = checkForMatchingStyleAndMerge(sharedStyles, style.Style, textLayer.style() );
+    // log(matchedStyleID);
+
+    if( matchedStyleID != 0 ) {
+      log('it matched. merging styles');
+      // sharedStyles.mergeSharedStyleWithName_sharedStyleID_instance( style.Style, matchedStyleID, textLayer.style() );
+    } else {
+      log('no matches. appending new style');
+      sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
+    }
   }
 
   function removeAllStyles() {
