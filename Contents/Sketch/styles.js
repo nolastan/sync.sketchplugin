@@ -43,8 +43,6 @@ var applyStyles = function (newStyles, sharedStyles) {
     var existingStyles = sharedStyles.objects();
 
     while(existingStyles.count() > 0) {
-      // style = existingStyles.objectAtIndex(0);
-      // [existingStyles removeObject:style];
       [sharedStyles removeSharedObjectAtIndex:0];
     }
   }
