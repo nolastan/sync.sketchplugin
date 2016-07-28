@@ -37,7 +37,8 @@ var applyTypography = function (newStyles, sharedStyles) {
 
     while(existingStyles.count() > 0) {
       style = existingStyles.objectAtIndex(0);
-      [existingStyles removeObject:style];
+      // [existingStyles removeObject:style];
+      [sharedStyles removeSharedObjectAtIndex:0];
     }
   }
 }
