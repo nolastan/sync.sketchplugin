@@ -19,7 +19,7 @@ var applyTypography = function (newStyles, sharedStyles) {
     var textLayer = [[MSTextLayer alloc] initWithFrame:nil];
 
     if("Size"      in style)  { textLayer.setFontSize(style.Size); }
-    if("Line"      in style)  { textLayer.setLineSpacing(style.Line); }
+    if("Line"      in style)  { textLayer.setLineHeight(style.Line); }
     if("Character" in style)  { textLayer.setCharacterSpacing(style.Character); }
     if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
