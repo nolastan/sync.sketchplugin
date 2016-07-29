@@ -1,57 +1,66 @@
 var applyStyles = function (newStyles, sharedStyles) {
 
-  // removeAllStyles();
+  // old way to add styles: 
+  // layer.style().fills().addNewStylePart()
+  // ---->
+  // new way to add styles
+  // layer.style().addStylePartOfType(0) // To add a new fill
+  // layer.style().addStylePartOfType(1) // To add a new border
+  // layer.style().addStylePartOfType(2) // To add a new shadow
+  // layer.style().addStylePartOfType(3) // To add a new inner shadow
 
-  // for(var i=0; i<newStyles.length; i++) {
-  //   createStyle(newStyles[i]);
-  // }
+  removeAllStyles();
 
-  // function createStyle(style) {
-  //   if(style.Style == "") { return; }
+  for(var i=0; i<newStyles.length; i++) {
+    createStyle(newStyles[i]);
+  }
 
-  //   var sharedStyle = MSShapeGroup.alloc().init().style();
+  function createStyle(style) {
+    if(style.Style == "") { return; }
 
-  //   if(style.Background) {
-  //     var fill = sharedStyle.fills().addNewStylePart();
-  //     fill.color = MSColor.colorWithSVGString("#" + style.Background);
-  //   }
+    var sharedStyle = MSShapeGroup.alloc().init().style();
 
-  //   if(style.Borderthickness > 0 && style.Bordercolor) {
-  //     var borders = sharedStyle.borders().addNewStylePart();
-  //     borders.thickness = style.Borderthickness;
-  //     borders.color = MSColor.colorWithSVGString("#" + style.Bordercolor);
-  //   }
+    if(style.Background) {
+      var fill = sharedStyle.addStylePartOfType(0);
+      fill.color = MSColor.colorWithSVGString("#" + style.Background);
+    }
 
-  //   if(style.Shadow) {
-  //     var shadow = sharedStyle.shadows().addNewStylePart();
-  //     var shadowColor = MSColor.colorWithSVGString("#" + style.Shadowcolor);
-  //     shadow.color = shadowColor.colorWithAlpha(style.Shadowopacity);
-  //     setShadowAttribute(shadow, style.Shadow);
-  //   }
+    if(style.Borderthickness > 0 && style.Bordercolor) {
+      var borders = sharedStyle.addStylePartOfType(1);
+      borders.thickness = style.Borderthickness;
+      borders.color = MSColor.colorWithSVGString("#" + style.Bordercolor);
+    }
 
-  //   if(style.Innershadow) {
-  //     var innerShadow = sharedStyle.innerShadows().addNewStylePart();
-  //     var innerShadowColor = MSColor.colorWithSVGString("#" + style.Innershadowcolor);
-  //     innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
-  //     setShadowAttribute(innerShadow, style.Innershadow);
-  //   }
+    if(style.Shadow) {
+      var shadow = sharedStyle.addStylePartOfType(2);
+      var shadowColor = MSColor.colorWithSVGString("#" + style.Shadowcolor);
+      shadow.color = shadowColor.colorWithAlpha(style.Shadowopacity);
+      setShadowAttribute(shadow, style.Shadow);
+    }
 
-  //   sharedStyles.addSharedStyleWithName_firstInstance(style.Style, sharedStyle);
-  // }
+    if(style.Innershadow) {
+      var innerShadow = sharedStyle.addStylePartOfType(3);
+      var innerShadowColor = MSColor.colorWithSVGString("#" + style.Innershadowcolor);
+      innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
+      setShadowAttribute(innerShadow, style.Innershadow);
+    }
 
-  // function removeAllStyles() {
-  //   var existingStyles = sharedStyles.objects();
+    sharedStyles.addSharedStyleWithName_firstInstance(style.Style, sharedStyle);
+  }
 
-  //   while(existingStyles.count() > 0) {
-  //     [sharedStyles removeSharedObjectAtIndex:0];
-  //   }
-  // }
+  function removeAllStyles() {
+    var existingStyles = sharedStyles.objects();
 
-  // function setShadowAttribute(shadow, shadowStyle) {
-  //   shadowAttr = shadowStyle.split(',');
-  //   shadow.offsetX    = shadowAttr[0];
-  //   shadow.offsetY    = shadowAttr[1];
-  //   shadow.blurRadius = shadowAttr[2];
-  //   shadow.spread     = shadowAttr[3];
-  // }
+    while(existingStyles.count() > 0) {
+      [sharedStyles removeSharedObjectAtIndex:0];
+    }
+  }
+
+  function setShadowAttribute(shadow, shadowStyle) {
+    shadowAttr = shadowStyle.split(',');
+    shadow.offsetX    = shadowAttr[0];
+    shadow.offsetY    = shadowAttr[1];
+    shadow.blurRadius = shadowAttr[2];
+    shadow.spread     = shadowAttr[3];
+  }
 }
