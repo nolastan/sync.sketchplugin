@@ -32,7 +32,7 @@ var applyTypography = function (newStyles, sharedStyles) {
       if(existingName == newStyleName) {
         log("they match");
 
-        sharedStyles.copyPropertiesToObject_options(existingStyleObjects[i].style(), newStyle);
+        sharedStyles.updateValueOfSharedObject_byCopyingInstance(existingStyleObjects[i], newStyle);
 
         return existingStyleObjects[i].objectID();
       }
