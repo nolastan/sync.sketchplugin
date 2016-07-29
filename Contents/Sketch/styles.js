@@ -1,5 +1,14 @@
 var applyStyles = function (newStyles, sharedStyles) {
 
+  // old way to add styles: 
+  // layer.style().fills().addNewStylePart()
+  // ---->
+  // new way to add styles
+  // layer.style().addStylePartOfType(0) // To add a new fill
+  // layer.style().addStylePartOfType(1) // To add a new border
+  // layer.style().addStylePartOfType(2) // To add a new shadow
+  // layer.style().addStylePartOfType(3) // To add a new inner shadow
+
   removeAllStyles();
 
   for(var i=0; i<newStyles.length; i++) {
@@ -12,25 +21,25 @@ var applyStyles = function (newStyles, sharedStyles) {
     var sharedStyle = MSShapeGroup.alloc().init().style();
 
     if(style.Background) {
-      var fill = sharedStyle.fills().addNewStylePart();
+      var fill = sharedStyle.addStylePartOfType(0);
       fill.color = MSColor.colorWithSVGString("#" + style.Background);
     }
 
     if(style.Borderthickness > 0 && style.Bordercolor) {
-      var borders = sharedStyle.borders().addNewStylePart();
+      var borders = sharedStyle.addStylePartOfType(1);
       borders.thickness = style.Borderthickness;
       borders.color = MSColor.colorWithSVGString("#" + style.Bordercolor);
     }
 
     if(style.Shadow) {
-      var shadow = sharedStyle.shadows().addNewStylePart();
+      var shadow = sharedStyle.addStylePartOfType(2);
       var shadowColor = MSColor.colorWithSVGString("#" + style.Shadowcolor);
       shadow.color = shadowColor.colorWithAlpha(style.Shadowopacity);
       setShadowAttribute(shadow, style.Shadow);
     }
 
     if(style.Innershadow) {
-      var innerShadow = sharedStyle.innerShadows().addNewStylePart();
+      var innerShadow = sharedStyle.addStylePartOfType(3);
       var innerShadowColor = MSColor.colorWithSVGString("#" + style.Innershadowcolor);
       innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
       setShadowAttribute(innerShadow, style.Innershadow);

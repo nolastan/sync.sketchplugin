@@ -1,5 +1,7 @@
 var applyTypography = function (newStyles, sharedStyles) {
 
+  var existingStyleObjects = [sharedStyles objects];
+
   var alignmentHash = {
     'left': 0,
     'right': 1,
@@ -8,11 +10,40 @@ var applyTypography = function (newStyles, sharedStyles) {
   };
 
   // this seems to be a simpler way to achieve the removeAllStyles function
-  [sharedStyles removeAllSharedObjects];
+  // [sharedStyles removeAllSharedObjects];
+
 
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
   }
+
+
+  function checkForMatchingStyleAndMerge(existingStyleObjects, newStyleName, newStyle) {
+
+    for (var i=0; i<existingStyleObjects.count(); i++) {
+      // log(i);
+      var existingName = existingStyleObjects[i].name();
+
+      // log("existing name is " + existingName);
+      // log("new style name is " + newStyleName);
+
+      if(existingName == newStyleName) {
+        // log("they match");
+
+        sharedStyles.updateValueOfSharedObject_byCopyingInstance(existingStyleObjects[i], newStyle);
+
+        return existingStyleObjects[i].objectID();
+      }
+
+    }
+
+    // log("no matches");
+    sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
+
+    return false;
+
+  }
+
 
   function createStyle(style) {
     if(style.Style == "") { return; }
@@ -32,16 +63,10 @@ var applyTypography = function (newStyles, sharedStyles) {
       color.alpha = style.Opacity;
       textLayer.setTextColor(color);
     }
+    
+    checkForMatchingStyleAndMerge(existingStyleObjects, style.Style, textLayer.style() );
 
-    sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
   }
 
-  function removeAllStyles() {
-    var existingStyles = sharedStyles.objects();
 
-    while(existingStyles.count() > 0) {
-      style = existingStyles.objectAtIndex(0);
-      [sharedStyles removeSharedObjectAtIndex:0];
-    }
-  }
 }
