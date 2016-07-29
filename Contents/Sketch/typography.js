@@ -27,10 +27,7 @@ var applyTypography = function (newStyles, sharedStyles) {
         return;
       }
     }
-
     sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
-    return false;
-
   }
 
 
