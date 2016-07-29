@@ -1,13 +1,11 @@
 var applyStyles = function (newStyles, sharedStyles) {
 
-  // old way to add styles: 
-  // layer.style().fills().addNewStylePart()
-  // ---->
-  // new way to add styles
-  // layer.style().addStylePartOfType(0) // To add a new fill
-  // layer.style().addStylePartOfType(1) // To add a new border
-  // layer.style().addStylePartOfType(2) // To add a new shadow
-  // layer.style().addStylePartOfType(3) // To add a new inner shadow
+  var alignmentHash = {
+    'fill': 0,
+    'border': 1,
+    'shadow': 2,
+    'innerShadow': 3
+  };
 
   removeAllStyles();
 
@@ -21,25 +19,25 @@ var applyStyles = function (newStyles, sharedStyles) {
     var sharedStyle = MSShapeGroup.alloc().init().style();
 
     if(style.Background) {
-      var fill = sharedStyle.addStylePartOfType(0);
+      var fill = sharedStyle.addStylePartOfType(alignmentHash['fill']);
       fill.color = MSColor.colorWithSVGString("#" + style.Background);
     }
 
     if(style.Borderthickness > 0 && style.Bordercolor) {
-      var borders = sharedStyle.addStylePartOfType(1);
+      var borders = sharedStyle.addStylePartOfType(alignmentHash['border']);
       borders.thickness = style.Borderthickness;
       borders.color = MSColor.colorWithSVGString("#" + style.Bordercolor);
     }
 
     if(style.Shadow) {
-      var shadow = sharedStyle.addStylePartOfType(2);
+      var shadow = sharedStyle.addStylePartOfType(alignmentHash['shadow']);
       var shadowColor = MSColor.colorWithSVGString("#" + style.Shadowcolor);
       shadow.color = shadowColor.colorWithAlpha(style.Shadowopacity);
       setShadowAttribute(shadow, style.Shadow);
     }
 
     if(style.Innershadow) {
-      var innerShadow = sharedStyle.addStylePartOfType(3);
+      var innerShadow = sharedStyle.addStylePartOfType(alignmentHash['innerShadow']);
       var innerShadowColor = MSColor.colorWithSVGString("#" + style.Innershadowcolor);
       innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
       setShadowAttribute(innerShadow, style.Innershadow);
