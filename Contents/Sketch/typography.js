@@ -1,5 +1,7 @@
 var applyTypography = function (newStyles, sharedStyles) {
 
+  var existingStyleObjects = [sharedStyles objects];
+
   var alignmentHash = {
     'left': 0,
     'right': 1,
@@ -7,39 +9,43 @@ var applyTypography = function (newStyles, sharedStyles) {
     'justified': 3
   };
 
-  // removes existing styles before importing 
-  // keeps sketch from shitting its pants the the styles already exist
-  // probably need to check for matching names though. This will wipe out other existing styles
+
   // [sharedStyles removeAllSharedObjects];
+
 
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
   }
 
-  function checkForMatchingStyleAndMerge(existingStyleArray, newStyleName, newStyle) {
-    // log(existingStyleArray);
-    // log(newStyleName);
-    // log(newStyle);
-    var existingStyleObjects = [existingStyleArray objects];
+
+  function checkForMatchingStyleAndMerge(existingStyleObjects, newStyleName, newStyle) {
+
+    // log(existingStyleObjects.count());
 
     for (var i=0; i<existingStyleObjects.count(); i++) {
+      log(i);
       var existingName = existingStyleObjects[i].name();
-      // log("existing name is " + existingName);
-      // log("new name is " + newStyleName);
+
+      log("existing name is " + existingName);
+      log("new style name is " + newStyleName);
 
       if(existingName == newStyleName) {
-        // log("name matched");
-        // existingStyleArray.mergeSharedStyleWithName_sharedStyleID_instance( newStyleName, existingStyleArray[i].objectID(), newStyle );
+        log("they match");
 
-        // existingStyleObjects[i].style().setValue(newStyle);
-        // existingStyleObjects[i].mergeSharedStyleWithName_sharedStyleID_instance( newStyleName, newStyle );
+        sharedStyles.copyPropertiesToObject_options(existingStyleObjects[i].style(), newStyle);
+
         return existingStyleObjects[i].objectID();
       }
-      return false;
+
     }
 
-    // should return true or false
+    log("no matches");
+    sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
+
+    return false;
+
   }
+
 
   function createStyle(style) {
     if(style.Style == "") { return; }
@@ -60,25 +66,22 @@ var applyTypography = function (newStyles, sharedStyles) {
       textLayer.setTextColor(color);
     }
 
-    // sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
-    var matchedStyleID = checkForMatchingStyleAndMerge(sharedStyles, style.Style, textLayer.style() );
-    // log(matchedStyleID);
 
-    if( matchedStyleID != 0 ) {
-      log('it matched. merging styles');
-      // sharedStyles.mergeSharedStyleWithName_sharedStyleID_instance( style.Style, matchedStyleID, textLayer.style() );
-    } else {
-      log('no matches. appending new style');
-      sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
-    }
+    //var matchedStyleID = checkForMatchingStyleAndMerge(sharedStyles, style.Style, textLayer.style() );
+    
+    checkForMatchingStyleAndMerge(existingStyleObjects, style.Style, textLayer.style() );
+
+    // if( matchedStyleID != 0 ) {
+    //   log('it matched. merging styles');
+    //   // sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
+    //   // sharedStyles.syncPropertiesFromObject(matchedStyleID);
+
+    // } else {
+    //   log('no matches. appending new style');
+
+      
+    // }
   }
 
-  function removeAllStyles() {
-    var existingStyles = sharedStyles.objects();
 
-    while(existingStyles.count() > 0) {
-      style = existingStyles.objectAtIndex(0);
-      [sharedStyles removeSharedObjectAtIndex:0];
-    }
-  }
 }
