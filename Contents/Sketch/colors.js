@@ -8,5 +8,5 @@ var applyColors = function (newColors, assetColors) {
     colors.push(color);
   }
   [assetColors addColors:colors];
-  appController.globalAssets().objectDidChange();
+  // appController.globalAssets().objectDidChange();
 }
