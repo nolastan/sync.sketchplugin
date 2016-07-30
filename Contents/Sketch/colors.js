@@ -8,5 +8,8 @@ var applyColors = function (newColors, assetColors) {
     colors.push(color);
   }
   [assetColors addColors:colors];
+
+  // The following line is throwing the error: is not a function
   // appController.globalAssets().objectDidChange();
+  
 }
