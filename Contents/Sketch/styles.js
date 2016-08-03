@@ -7,7 +7,7 @@ var applyStyles = function (newStyles, sharedStyles) {
     'innerShadow': 3
   };
 
-  removeAllStyles();
+  [sharedStyles removeAllSharedObjects];
 
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
@@ -44,14 +44,6 @@ var applyStyles = function (newStyles, sharedStyles) {
     }
 
     sharedStyles.addSharedStyleWithName_firstInstance(style.Style, sharedStyle);
-  }
-
-  function removeAllStyles() {
-    var existingStyles = sharedStyles.objects();
-
-    while(existingStyles.count() > 0) {
-      [sharedStyles removeSharedObjectAtIndex:0];
-    }
   }
 
   function setShadowAttribute(shadow, shadowStyle) {
