@@ -1,5 +1,7 @@
 var applyTypography = function (newStyles, sharedStyles) {
 
+  var existingStyleObjects = [sharedStyles objects];
+
   var alignmentHash = {
     'left': 0,
     'right': 1,
@@ -7,11 +9,27 @@ var applyTypography = function (newStyles, sharedStyles) {
     'justified': 3
   };
 
-  removeAllStyles();
+  // this seems to be a simpler way to achieve the removeAllStyles function
+  // [sharedStyles removeAllSharedObjects];
+
 
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
   }
+
+
+  function checkForMatchingStyleAndMerge(existingStyleObjects, newStyleName, newStyle) {
+
+    for (var i=0; i<existingStyleObjects.count(); i++) {
+      var existingName = existingStyleObjects[i].name();
+      if(existingName == newStyleName) {
+        sharedStyles.updateValueOfSharedObject_byCopyingInstance(existingStyleObjects[i], newStyle);
+        return;
+      }
+    }
+    sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
+  }
+
 
   function createStyle(style) {
     if(style.Style == "") { return; }
@@ -19,8 +37,11 @@ var applyTypography = function (newStyles, sharedStyles) {
     var textLayer = [[MSTextLayer alloc] initWithFrame:nil];
 
     if("Size"      in style)  { textLayer.setFontSize(style.Size); }
-    if("Line"      in style)  { textLayer.setLineSpacing(style.Line); }
-    if("Character" in style)  { textLayer.setCharacterSpacing(style.Character); }
+    if("Line"      in style)  { textLayer.setLineHeight(style.Line); }
+    if("Character" in style)  { 
+      var characterSpacing = Number(style.Character);
+      textLayer.setCharacterSpacing(characterSpacing); 
+    }
     if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
     if("Color"     in style)  {
@@ -28,16 +49,10 @@ var applyTypography = function (newStyles, sharedStyles) {
       color.alpha = style.Opacity;
       textLayer.setTextColor(color);
     }
+    
+    checkForMatchingStyleAndMerge(existingStyleObjects, style.Style, textLayer.style() );
 
-    sharedStyles.addSharedStyleWithName_firstInstance(style.Style, textLayer.style());
   }
 
-  function removeAllStyles() {
-    var existingStyles = sharedStyles.objects();
 
-    while(existingStyles.count() > 0) {
-      style = existingStyles.objectAtIndex(0);
-      [existingStyles removeObject:style];
-    }
-  }
 }
