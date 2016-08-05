@@ -1,7 +1,5 @@
 var applyTypography = function (newStyles, sharedStyles) {
 
-  var existingStyleObjects = [sharedStyles objects];
-
   var alignmentEnum = Object.freeze({
     'left': 0,
     'right': 1,
@@ -44,6 +42,6 @@ var applyTypography = function (newStyles, sharedStyles) {
       textLayer.setTextColor(color);
     }
 
-    checkForMatchingStyleAndMerge(existingStyleObjects, style.Style, textLayer.style() );
+    checkForMatchingStyleAndMerge(sharedStyles.objects(), style.Style, textLayer.style() );
   }
 }
