@@ -2,12 +2,12 @@ var applyTypography = function (newStyles, sharedStyles) {
 
   var existingStyleObjects = [sharedStyles objects];
 
-  var alignmentHash = {
+  var alignmentEnum = Object.freeze({
     'left': 0,
     'right': 1,
     'center': 2,
     'justified': 3
-  };
+  });
 
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
@@ -36,7 +36,7 @@ var applyTypography = function (newStyles, sharedStyles) {
       var characterSpacing = Number(style.Character);
       textLayer.setCharacterSpacing(characterSpacing);
     }
-    if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
+    if("Alignment" in style)  { textLayer.setTextAlignment(alignmentEnum[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
     if("Color"     in style)  {
       var color = MSColor.colorWithSVGString("#" + style.Color);
