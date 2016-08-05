@@ -9,14 +9,9 @@ var applyTypography = function (newStyles, sharedStyles) {
     'justified': 3
   };
 
-  // this seems to be a simpler way to achieve the removeAllStyles function
-  // [sharedStyles removeAllSharedObjects];
-
-
   for(var i=0; i<newStyles.length; i++) {
     createStyle(newStyles[i]);
   }
-
 
   function checkForMatchingStyleAndMerge(existingStyleObjects, newStyleName, newStyle) {
 
@@ -30,7 +25,6 @@ var applyTypography = function (newStyles, sharedStyles) {
     sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
   }
 
-
   function createStyle(style) {
     if(style.Style == "") { return; }
 
@@ -38,9 +32,9 @@ var applyTypography = function (newStyles, sharedStyles) {
 
     if("Size"      in style)  { textLayer.setFontSize(style.Size); }
     if("Line"      in style)  { textLayer.setLineHeight(style.Line); }
-    if("Character" in style)  { 
+    if("Character" in style)  {
       var characterSpacing = Number(style.Character);
-      textLayer.setCharacterSpacing(characterSpacing); 
+      textLayer.setCharacterSpacing(characterSpacing);
     }
     if("Alignment" in style)  { textLayer.setTextAlignment(alignmentHash[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
@@ -49,10 +43,7 @@ var applyTypography = function (newStyles, sharedStyles) {
       color.alpha = style.Opacity;
       textLayer.setTextColor(color);
     }
-    
+
     checkForMatchingStyleAndMerge(existingStyleObjects, style.Style, textLayer.style() );
-
   }
-
-
 }
