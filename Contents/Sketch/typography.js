@@ -11,18 +11,6 @@ var applyTypography = function (newStyles, sharedStyles) {
     createStyle(newStyles[i]);
   }
 
-  function checkForMatchingStyleAndMerge(existingStyleObjects, newStyleName, newStyle) {
-
-    for (var i=0; i<existingStyleObjects.count(); i++) {
-      var existingName = existingStyleObjects[i].name();
-      if(existingName == newStyleName) {
-        sharedStyles.updateValueOfSharedObject_byCopyingInstance(existingStyleObjects[i], newStyle);
-        return;
-      }
-    }
-    sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
-  }
-
   function createStyle(style) {
     if(style.Style == "") { return; }
 
@@ -42,6 +30,6 @@ var applyTypography = function (newStyles, sharedStyles) {
       textLayer.setTextColor(color);
     }
 
-    checkForMatchingStyleAndMerge(sharedStyles.objects(), style.Style, textLayer.style() );
+    utils.updateStyles(sharedStyles.objects(), style.Style, textLayer.style(), sharedStyles);
   }
 }

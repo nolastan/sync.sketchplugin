@@ -11,18 +11,6 @@ var applyStyles = function (newStyles, sharedStyles) {
     createStyle(newStyles[i]);
   }
 
-  function checkForMatchingStyleAndMerge(existingStyleObjects, newStyleName, newStyle) {
-
-    for (var i=0; i<existingStyleObjects.count(); i++) {
-      var existingName = existingStyleObjects[i].name();
-      if(existingName == newStyleName) {
-        sharedStyles.updateValueOfSharedObject_byCopyingInstance(existingStyleObjects[i], newStyle);
-        return;
-      }
-    }
-    sharedStyles.addSharedStyleWithName_firstInstance(newStyleName, newStyle);
-  }
-
   function createStyle(style) {
     if(style.Style == "") { return; }
 
@@ -52,8 +40,7 @@ var applyStyles = function (newStyles, sharedStyles) {
       innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
       setShadowAttribute(innerShadow, style.Innershadow);
     }
-
-    checkForMatchingStyleAndMerge(sharedStyles.objects(), style.Style, sharedStyle);
+    utils.updateStyles(sharedStyles.objects(), style.Style, sharedStyle, sharedStyles);
   }
 
   function setShadowAttribute(shadow, shadowStyle) {

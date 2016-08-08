@@ -1,6 +1,7 @@
 @import 'typography.js';
 @import 'colors.js';
 @import 'styles.js';
+@import 'utils.js';
 
 var onRun = function(context) {
   var doc = context.document;
