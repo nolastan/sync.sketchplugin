@@ -70,7 +70,7 @@ var onRun = function(context) {
   }
 
   function showOptions() {
-    var alert = [NSAlert alertWithMessageText: "Sync text styles"
+    var alert = [NSAlert alertWithMessageText: "Sync styles and colors"
                                    defaultButton:"Sync"
                                  alternateButton:"Cancel"
                                      otherButton:nil

@@ -1,7 +1,7 @@
 # Sync Sketch Plugin
 ![](https://i.imgur.com/dUeIJjI.gif)
 
-Save your text styles, layer styles, and color palette in a Google Sheet to keep your design team in sync. Every time you run this plugin your styles and colors will be replaced with those you specify in a spreadsheet. This should make it easier to share typography styles across teams!
+Save your text styles, layer styles, and color palette in a Google Sheet to keep your design team in sync. Just run the plugin to import layer and text styles, and run again any time to update them. Colors will be appended to Document Colors.
 
 # Installation
 Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.1/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
