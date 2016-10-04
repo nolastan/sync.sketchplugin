@@ -1,20 +1,34 @@
 # Sync Sketch Plugin
 ![](https://i.imgur.com/dUeIJjI.gif)
 
-Save your text styles, layer styles, and color palette in a Google Sheet to keep your design team in sync. Every time you run this plugin your styles and colors will be replaced with those you specify in a spreadsheet. This should make it easier to share typography styles across teams!
+Share styles with your team using Google Sheets.
+* Import and update styles from a shared Google Sheet.
+* Export styles as CSV files, which can be uploaded to Google Sheets and shared with your team.
+* Use formulas in Google Sheets to set relative font sizes and line heights.
 
 # Installation
 Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.1/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
 
-# Getting Started
+# Setting up Google Sheets
+You'll need a published sheet to use Sync.
 
 1. Create a Google Sheet from [this template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) (click the "Use this template" button).
 
 2. Select *File > Publish to web…* and then click the *Publish* button.
 
-3. Copy the link to your sheet. (See below if you are using Google Apps at work)
+# Exporting styles
+Export styles from Sketch to you sheet. Alternatively, you can skip this step and define your initial styles in the Google Sheets interface.
 
-4. Run the Sync command from the plugin menu and paste your URL into the prompt.
+1. With the Sketch document containing your styles open, run the *Export* command from the Sync plugin menu. A finder window should open revealing `typography.csv`.
+2. Open your Google Sheet,  select *File > Import…* and then *Upload*.
+3. Drag `typography.csv` into the upload screen and select *Replace current sheet* then click *Import*.
+
+# Importing styles
+Import styles from your sheet to Sketch.
+
+1. Copy the URL to your Google Sheet. (See below if you are using Google Apps at work)
+
+2. Run the `Import` command from the Sync plugin menu and paste your URL into the prompt.
 
 Your text styles, layer styles, and color palette should now be synced with your spreadsheet. Run the plugin again any time to update. Share your published sheet URL with your team to stay in sync.
 
@@ -22,7 +36,7 @@ Your text styles, layer styles, and color palette should now be synced with your
 Some companies prevent employees from publishing sheets. If the *Published content & settings* drill-down in the *Publish to the web* modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit [Sheetsu](http://sheetsu.com/) to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 4.
 
 ## Font Weight
-Font variants—such as bold, italic, or narrow—are actually separate font files on your computer. You should specify these exactly as named in `~/Library/Fonts/` folder on your Mac, *excluding* the file extension (e.g. `ttf`). The [Google Sheet template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) provides an example of this.
+Font variants—such as bold, italic, or narrow—are actually separate font files on your computer. You should specify these exactly as named in `~/Library/Fonts/` folder on your Mac, *excluding* the file extension (e.g. `ttf`). The [Google Sheet template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) provides an example of this. If you get stuck, consider defining your styles in Sketch and using the export feature.
 
 ## Need help?
 [View the screencast](https://dl.dropboxusercontent.com/s/f4ubqenqz8n5wne/68D4E91B-173A-4AA0-964C-AA7F9EA77AC8-5233-000032842DD067F4.gif?dl=0), [create an issue](https://github.com/nolastan/sync.sketchplugin/issues/new) or [tweet @stan](https://twitter.com/stan).
@@ -51,4 +65,4 @@ As an alternative to Google Sheets, you can create a custom JSON api with the fo
   ]
 }
 ```
-Run the Sync command from the plugin menu and paste your API endpoint URL into the prompt.
+Run the *Import* command from the Sync plugin menu and paste your API endpoint URL into the prompt.

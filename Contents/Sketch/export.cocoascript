@@ -1,0 +1,77 @@
+var onRun = function(context) {
+  var output = 'Style, Typeface, Color, Opacity, Size, Alignment, Line, Character'
+
+  var alignmentEnum = Object.freeze([
+    'left','right','center','justified'
+  ]);
+
+  var doc = context.document;
+  var sharedStyles = doc.documentData().layerTextStyles();
+  var styleObjects = sharedStyles.objects();
+  var textLayer = [[MSTextLayer alloc] initWithFrame:nil];
+
+
+  for (var i=0; i<styleObjects.length; i++) {
+    textLayer.setStyle(styleObjects[i].style());
+
+    var name = styleObjects[i].name();
+
+    var attributes = styleObjects[i].style().textStyle().attributes()
+
+    var paragraphStyle = attributes.NSParagraphStyle;
+    var alignment = alignmentEnum[paragraphStyle.alignment()];
+
+    var line = textLayer.lineHeight() || '';
+    var character = textLayer.characterSpacing() || '';
+
+    var font = attributes.NSFont.fontName();
+    var color = '#' + attributes.NSColor.hexValue();
+    var opacity = attributes.NSColor.alphaComponent();
+    var size = attributes.NSFont.pointSize();
+
+    output += '\n' + name +', '+ font  +', '+ color +', '+ opacity +', '+ size +', '+ alignment +', '+ line +', '+ character;
+  }
+
+  var writeTextToFile = function(text, filePath) {
+      var t = [NSString stringWithFormat:@"%@", text],
+      f = [NSString stringWithFormat:@"%@", filePath];
+      return [t writeToFile:f atomically:true encoding:NSUTF8StringEncoding error:nil];
+  }
+
+  var openInFinder = function(path) {
+      var finderTask = [[NSTask alloc] init],
+          openFinderArgs = [NSArray arrayWithObjects:"-R", path, nil];
+
+      [finderTask setLaunchPath:"/usr/bin/open"];
+      [finderTask setArguments:openFinderArgs];
+      [finderTask launch];
+  }
+
+  var createTempFolderNamed = function(name) {
+      var tempPath = getTempFolderPath(name);
+      createFolderAtPath(tempPath);
+      return tempPath;
+  }
+  var getTempFolderPath = function(withName) {
+      var fileManager = [NSFileManager defaultManager],
+      cachesURL = [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject],
+      withName = (typeof withName !== 'undefined') ? withName : (Date.now() / 1000),
+      folderName = [NSString stringWithFormat:"%@", withName];
+      return [[cachesURL URLByAppendingPathComponent:folderName] path];
+  }
+
+  var createFolderAtPath = function(pathString) {
+      var fileManager = [NSFileManager defaultManager];
+      if([fileManager fileExistsAtPath:pathString]) return true;
+      return [fileManager createDirectoryAtPath:pathString withIntermediateDirectories:true attributes:nil error:nil];
+  }
+
+  var folder = createTempFolderNamed('sync');
+  var file = folder + '/typography.csv';
+
+  var shortcutPath = folder + '/README.url';
+  var shortcutFile = '[InternetShortcut]\nURL=https://github.com/nolastan/sync.sketchplugin#exporting-styles'
+  writeTextToFile(output, file);
+  writeTextToFile(shortcutFile, shortcutPath);
+  openInFinder(file);
+}

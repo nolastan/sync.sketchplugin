@@ -4,15 +4,22 @@
     {
       "script" : "script.cocoascript",
       "handler" : "onRun",
-      "shortcut" : "option s",
-      "name" : "Sync",
-      "identifier" : "sync"
+      "shortcut" : "command option s",
+      "name" : "Import from URL",
+      "identifier" : "import"
+    },
+    {
+      "script" : "export.cocoascript",
+      "handler" : "onRun",
+      "name" : "Export typography as CSV",
+      "identifier" : "export"
     },
   ],
   "menu": {
-    "isRoot": true,
+    "isRoot": false,
     "items": [
-      "sync",
+      "import",
+      "export"
     ],
   },
   "identifier" : "com.github.nolastan.sync",

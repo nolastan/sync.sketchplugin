@@ -27,9 +27,11 @@ var applyTypography = function (newStyles, sharedStyles) {
     if(style.Style == "") { return; }
 
     var textLayer = [[MSTextLayer alloc] initWithFrame:nil];
+    var paragraphStyle = textLayer.style().textStyle().attributes().NSParagraphStyle;
 
     if("Size"      in style)  { textLayer.setFontSize(style.Size); }
     if("Line"      in style)  { textLayer.setLineHeight(style.Line); }
+    if("Paragraph" in style)  { paragraphStyle.setParagraphSpacing(style.Paragraph); }
     if("Character" in style)  {
       var characterSpacing = Number(style.Character);
       textLayer.setCharacterSpacing(characterSpacing);
