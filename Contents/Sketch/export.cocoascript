@@ -12,6 +12,8 @@ var onRun = function(context) {
 
 
   for (var i=0; i<styleObjects.length; i++) {
+    var color, opacity, alignment = "";
+
     textLayer.setStyle(styleObjects[i].style());
 
     var name = styleObjects[i].name();
@@ -19,16 +21,21 @@ var onRun = function(context) {
     var attributes = styleObjects[i].style().textStyle().attributes()
 
     var paragraphStyle = attributes.NSParagraphStyle;
-    var alignment = alignmentEnum[paragraphStyle.alignment()];
+
+    if(paragraphStyle) {
+      alignment = alignmentEnum[paragraphStyle.alignment()] || "";
+    }
 
     var line = textLayer.lineHeight() || '';
     var character = textLayer.characterSpacing() || '';
 
     var font = attributes.NSFont.fontName();
-    var color = '#' + attributes.NSColor.hexValue();
-    var opacity = attributes.NSColor.alphaComponent();
-    var size = attributes.NSFont.pointSize();
 
+    if(attributes.NSColor) {
+      color = attributes.NSColor.hexValue();
+      opacity = attributes.NSColor.alphaComponent();
+    }
+    var size = attributes.NSFont.pointSize();
     output += '\n' + name +', '+ font  +', '+ color +', '+ opacity +', '+ size +', '+ alignment +', '+ line +', '+ character;
   }
 
