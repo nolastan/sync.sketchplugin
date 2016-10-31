@@ -5,26 +5,26 @@
       "script" : "script.cocoascript",
       "handler" : "onRun",
       "shortcut" : "command option s",
-      "name" : "Import from URL",
+      "name" : "⬇️ Import from URL",
       "identifier" : "import"
     },
     {
       "script" : "export.cocoascript",
       "handler" : "onRun",
-      "name" : "Export typography as CSV",
+      "name" : "⬆️ Export typography as CSV",
       "identifier" : "export"
     },
   ],
   "menu": {
     "isRoot": false,
     "items": [
-      "import",
-      "export"
+      "export",
+      "import"
     ],
   },
   "identifier" : "com.github.nolastan.sync",
   "version" : "1.1",
   "description" : "Sync styles and symbols",
   "authorEmail" : "nolastan@gmail.com",
-  "name" : "Sync"
+  "name" : "🎨 Sync"
 }
