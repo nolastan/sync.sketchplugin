@@ -17,7 +17,7 @@ You'll need a published sheet to use Sync.
 2. Select *File > Publish to web…* and then click the *Publish* button.
 
 # Exporting styles
-Export styles from Sketch to you sheet. Alternatively, you can skip this step and define your initial styles in the Google Sheets interface.
+Export styles from Sketch to your sheet. Alternatively, you can skip this step and define your initial styles in the Google Sheets interface.
 
 1. With the Sketch document containing your styles open, run the *Export* command from the Sync plugin menu. A finder window should open revealing `typography.csv`.
 2. Open your Google Sheet,  select *File > Import…* and then *Upload*.
