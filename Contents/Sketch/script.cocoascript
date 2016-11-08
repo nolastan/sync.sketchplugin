@@ -32,7 +32,7 @@ var onRun = function(context) {
         }
       }
     } else {
-      applyTypography(request(queryURL).result, doc.documentData().layerTextStyles());
+      applyTypography(JSON.parse(request(queryURL)).result, doc.documentData().layerTextStyles());
     }
   }
 
