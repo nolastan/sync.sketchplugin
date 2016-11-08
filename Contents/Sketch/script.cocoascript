@@ -9,7 +9,7 @@ var onRun = function(context) {
   showOptions();
   loadFromURL(dict['syncSource']);
 
-  doc.showMessage('Import complete!');
+  doc.showMessage('Sync complete!');
   doc.reloadInspector();
 
   function loadFromURL(queryURL) {
@@ -69,7 +69,7 @@ var onRun = function(context) {
   }
 
   function showOptions() {
-    var alert = [NSAlert alertWithMessageText: "Import styles"
+    var alert = [NSAlert alertWithMessageText: "Sync text styles"
                                    defaultButton:"Import"
                                  alternateButton:"Cancel"
                                      otherButton:nil
