@@ -20,26 +20,26 @@ var applyStyles = function (newStyles, sharedStyles) {
 
     if(style.Background) {
       var fill = sharedStyle.addStylePartOfType(alignmentHash['fill']);
-      fill.color = MSColor.colorWithSVGString("#" + style.Background);
+      fill.color = MSImmutableColor.colorWithSVGString("#" + style.Background);
     }
 
     if(style.Borderthickness > 0 && style.Bordercolor) {
       var borders = sharedStyle.addStylePartOfType(alignmentHash['border']);
       borders.thickness = style.Borderthickness;
-      borders.color = MSColor.colorWithSVGString("#" + style.Bordercolor);
+      borders.color = MSImmutableColor.colorWithSVGString("#" + style.Bordercolor);
     }
 
     if(style.Shadow) {
       var shadow = sharedStyle.addStylePartOfType(alignmentHash['shadow']);
-      var shadowColor = MSColor.colorWithSVGString("#" + style.Shadowcolor);
-      shadow.color = shadowColor.colorWithAlpha(style.Shadowopacity);
+      var shadowColor = MSImmutableColor.colorWithSVGString("#" + style.Shadowcolor);
+      shadow.color = shadowColor.colorWithAlphaComponent(style.Shadowopacity);
       setShadowAttribute(shadow, style.Shadow);
     }
 
     if(style.Innershadow) {
       var innerShadow = sharedStyle.addStylePartOfType(alignmentHash['innerShadow']);
-      var innerShadowColor = MSColor.colorWithSVGString("#" + style.Innershadowcolor);
-      innerShadow.color = innerShadowColor.colorWithAlpha(style.Innershadowopacity);
+      var innerShadowColor = MSImmutableColor.colorWithSVGString("#" + style.Innershadowcolor);
+      innerShadow.color = innerShadowColor.colorWithAlphaComponent(style.Innershadowopacity);
       setShadowAttribute(innerShadow, style.Innershadow);
     }
 

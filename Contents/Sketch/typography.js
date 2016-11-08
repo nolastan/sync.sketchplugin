@@ -39,7 +39,7 @@ var applyTypography = function (newStyles, sharedStyles) {
     if("Alignment" in style)  { textLayer.setTextAlignment(alignmentEnum[style.Alignment]); }
     if("Typeface"  in style)  { textLayer.setFontPostscriptName(style.Typeface); }
     if("Color"     in style)  {
-      var color = MSColor.colorWithSVGString("#" + style.Color);
+      var color = MSImmutableColor.colorWithSVGString("#" + style.Color);
       color.alpha = style.Opacity;
       textLayer.setTextColor(color);
     }
