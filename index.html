@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sync.sketchplugin by nolastan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Sync.sketchplugin</h1>
+      <h2 class="project-tagline">Keep your design team in sync!</h2>
+      <a href="https://github.com/nolastan/sync.sketchplugin" class="btn">View on GitHub</a>
+      <a href="https://github.com/nolastan/sync.sketchplugin/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/nolastan/sync.sketchplugin/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="sync-sketch-plugin" class="anchor" href="#sync-sketch-plugin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sync Sketch Plugin</h1>
+
+<p>Share styles with your team using Google Sheets.</p>
+
+<ul>
+<li>Import and update styles from a shared Google Sheet.</li>
+<li>Export styles as CSV files, which can be uploaded to Google Sheets and shared with your team.</li>
+<li>Use formulas in Google Sheets to set relative font sizes and line heights.</li>
+</ul>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>Install from <a href="http://sketchtoolbox.com/">Sketch Toolbox</a> (recommended) or <a href="https://github.com/nolastan/sync.sketchplugin/releases/download/1.3/sync.sketchplugin.zip">download the zip</a>, unzip, and open <code>sync.sketchplugin</code>.</p>
+
+<h1>
+<a id="setting-up-google-sheets" class="anchor" href="#setting-up-google-sheets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up Google Sheets</h1>
+
+<p>You'll need a published sheet to use Sync.</p>
+
+<p><img src="http://g.recordit.co/Nc8675CESb.gif" alt=""></p>
+
+<ol>
+<li><p>Create a Google Sheet from <a href="https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&amp;mode=public">this template</a> (click the "Use this template" button).</p></li>
+<li><p>Select <em>File &gt; Publish to web…</em> and then click the <em>Publish</em> button.</p></li>
+</ol>
+
+<h1>
+<a id="exporting-styles" class="anchor" href="#exporting-styles" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Exporting styles</h1>
+
+<p>Export styles from Sketch to your sheet. Alternatively, you can skip this step and define your initial styles in the Google Sheets interface.</p>
+
+<p><img src="http://g.recordit.co/BtV9lRpUJV.gif" alt=""></p>
+
+<ol>
+<li>With the Sketch document containing your styles open, run the <em>Export</em> command from the Sync plugin menu. A finder window should open revealing <code>typography.csv</code>.</li>
+<li>Open your Google Sheet,  select <em>File &gt; Import…</em> and then <em>Upload</em>.</li>
+<li>Drag <code>typography.csv</code> into the upload screen and select <em>Replace current sheet</em> then click <em>Import</em>.</li>
+</ol>
+
+<h1>
+<a id="importing-styles" class="anchor" href="#importing-styles" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Importing styles</h1>
+
+<p>Import styles from your sheet to Sketch.</p>
+
+<p><img src="http://g.recordit.co/7ZrZSaRCWx.gif" alt=""></p>
+
+<ol>
+<li><p>Copy the URL to your Google Sheet. (See below if you are using Google Apps at work)</p></li>
+<li><p>Run the <code>Import</code> command from the Sync plugin menu and paste your URL into the prompt.</p></li>
+</ol>
+
+<p>Your text styles, layer styles, and color palette should now be synced with your spreadsheet. Run the plugin again any time to update. Share your published sheet URL with your team to stay in sync.</p>
+
+<h2>
+<a id="using-google-apps-at-work" class="anchor" href="#using-google-apps-at-work" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using Google Apps at work?</h2>
+
+<p>Some companies prevent employees from publishing sheets. If the <em>Published content &amp; settings</em> drill-down in the <em>Publish to the web</em> modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit <a href="http://sheetsu.com/">Sheetsu</a> to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 4.</p>
+
+<h2>
+<a id="font-weight" class="anchor" href="#font-weight" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Font Weight</h2>
+
+<p>Font variants—such as bold, italic, or narrow—are actually separate font files on your computer. You should specify these exactly as named in <code>~/Library/Fonts/</code> folder on your Mac, <em>excluding</em> the file extension (e.g. <code>ttf</code>). The <a href="https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&amp;mode=public">Google Sheet template</a> provides an example of this. If you get stuck, consider defining your styles in Sketch and using the export feature.</p>
+
+<h2>
+<a id="need-help" class="anchor" href="#need-help" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Need help?</h2>
+
+<p><a href="https://dl.dropboxusercontent.com/s/f4ubqenqz8n5wne/68D4E91B-173A-4AA0-964C-AA7F9EA77AC8-5233-000032842DD067F4.gif?dl=0">View the screencast</a>, <a href="https://github.com/nolastan/sync.sketchplugin/issues/new">create an issue</a> or <a href="https://twitter.com/stan">tweet @stan</a>.</p>
+
+<h1>
+<a id="pattern-libraries" class="anchor" href="#pattern-libraries" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pattern Libraries</h1>
+
+<p><a href="https://github.com/nolastan/sync.sketchplugin/issues/new?title=Add%20library&amp;body=I%27d%20like%20to%20add%20this%20library%20I%20created:%20">Share your pattern library</a> with the Sync community.</p>
+
+<ul>
+<li>
+<a href="https://docs.google.com/spreadsheets/d/1UkS9KRWmjvDu_DpCnB3KZ0mcYdmgyZmuWu-lkpfgjMw/pubhtml">Material Design</a> (<a href="https://www.google.com/fonts/specimen/Roboto">Download Roboto</a>)</li>
+</ul>
+
+<h1>
+<a id="custom-api" class="anchor" href="#custom-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Custom API</h1>
+
+<p>As an alternative to Google Sheets, you can create a custom JSON api with the following structure. Currently this method only supports typography.</p>
+
+<pre><code>{
+  …
+  result: [
+    {
+      Style: "Headline 1",
+      Size: "32",
+      Color: "DD2E1F",
+      Opacity: "85",
+      Typeface: "SourceSansPro-Semibold",
+      Alignment: "center",
+      Line: "40",
+      Character: "0"
+    },
+    …
+  ]
+}
+</code></pre>
+
+<p>Run the <em>Import</em> command from the Sync plugin menu and paste your API endpoint URL into the prompt.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/nolastan/sync.sketchplugin">Sync.sketchplugin</a> is maintained by <a href="https://github.com/nolastan">nolastan</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
