@@ -1,6 +1,4 @@
 # Sync Sketch Plugin
-![](https://i.imgur.com/dUeIJjI.gif)
-
 Share styles with your team using Google Sheets.
 * Import and update styles from a shared Google Sheet.
 * Export styles as CSV files, which can be uploaded to Google Sheets and shared with your team.
@@ -12,6 +10,8 @@ Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [downl
 # Setting up Google Sheets
 You'll need a published sheet to use Sync.
 
+![](http://g.recordit.co/Nc8675CESb.gif)
+
 1. Create a Google Sheet from [this template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) (click the "Use this template" button).
 
 2. Select *File > Publish to web…* and then click the *Publish* button.
@@ -19,12 +19,16 @@ You'll need a published sheet to use Sync.
 # Exporting styles
 Export styles from Sketch to your sheet. Alternatively, you can skip this step and define your initial styles in the Google Sheets interface.
 
+![](http://g.recordit.co/BtV9lRpUJV.gif)
+
 1. With the Sketch document containing your styles open, run the *Export* command from the Sync plugin menu. A finder window should open revealing `typography.csv`.
 2. Open your Google Sheet,  select *File > Import…* and then *Upload*.
 3. Drag `typography.csv` into the upload screen and select *Replace current sheet* then click *Import*.
 
 # Importing styles
 Import styles from your sheet to Sketch.
+
+![](http://g.recordit.co/7ZrZSaRCWx.gif)
 
 1. Copy the URL to your Google Sheet. (See below if you are using Google Apps at work)
 
