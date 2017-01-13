@@ -6,13 +6,17 @@
       "handler" : "onRun",
       "shortcut" : "command option s",
       "name" : "⬇️ Import from URL",
-      "identifier" : "import"
+      "identifier" : "import",
+      "description" : "Import styles, colors, and typography from a Google Sheet or other source.",
+      "icon" : "icons/import.tiff"
     },
     {
       "script" : "export.cocoascript",
       "handler" : "onRun",
       "name" : "⬆️ Export typography as CSV",
-      "identifier" : "export"
+      "identifier" : "export",
+      "description" : "Export typography as a CSV to import into a Google Sheet",
+      "icon" : "icons/export.tiff"
     },
   ],
   "menu": {

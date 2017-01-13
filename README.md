@@ -1,3 +1,5 @@
+[![Works with Sketch Runner](http://sketchrunner.com/img/badge_blue.png)](http://bit.ly/SketchRunnerWebsite)
+
 # Sync Sketch Plugin
 Share styles with your team using Google Sheets.
 * Import and update styles from a shared Google Sheet.
