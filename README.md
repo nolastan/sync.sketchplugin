@@ -8,7 +8,7 @@ Share styles with your team using Google Sheets.
 * Use formulas in Google Sheets to set relative font sizes and line heights.
 
 # Installation
-Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.3/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
+Install from [Sketch Toolbox](http://sketchtoolbox.com/) (recommended) or [download the zip](https://github.com/nolastan/sync.sketchplugin/releases/download/1.4/sync.sketchplugin.zip), unzip, and open `sync.sketchplugin`.
 
 # Setting up Google Sheets
 You'll need a published sheet to use Sync.
