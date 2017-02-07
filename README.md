@@ -40,7 +40,7 @@ Import styles from your sheet to Sketch.
 Your text styles, layer styles, and color palette should now be synced with your spreadsheet. Run the plugin again any time to update. Share your published sheet URL with your team to stay in sync.
 
 ## Using Google Apps at work?
-Some companies prevent employees from publishing sheets. If the *Published content & settings* drill-down in the *Publish to the web* modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit [Sheetsu](http://sheetsu.com/) to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 4.
+Some companies prevent employees from publishing sheets. If the *Published content & settings* drill-down in the *Publish to the web* modal says that people at your company must log in to view, then Sync will not be able to access your sheet. Don't worry – you can still use Sync for typography. Just visit [Sheetsu](http://sheetsu.com/) to generate an API for your new sheet. Use your new Sheetsu URL and continue to step 2.
 
 ## Font Weight
 Font variants—such as bold, italic, or narrow—are actually separate font files on your computer. You should specify these exactly as named in `~/Library/Fonts/` folder on your Mac, *excluding* the file extension (e.g. `ttf`). The [Google Sheet template](https://drive.google.com/previewtemplate?id=17q6GOMM1X6kkvgeL3LeGkRr4C2vOhpM_JiQUWxbBtew&mode=public) provides an example of this. If you get stuck, consider defining your styles in Sketch and using the export feature.
