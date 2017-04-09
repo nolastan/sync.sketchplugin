@@ -1,6 +1,7 @@
 <a href="http://bit.ly/SketchRunnerWebsite">
   <img width="160" height="40" src="http://sketchrunner.com/img/badge_blue.png" >
 </a>
+
 # Sync Sketch Plugin
 Share styles with your team using Google Sheets.
 * Import and update styles from a shared Google Sheet.
