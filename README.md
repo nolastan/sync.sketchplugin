@@ -1,5 +1,8 @@
 <a href="http://bit.ly/SketchRunnerWebsite">
-  <img width="160" height="40" src="http://sketchrunner.com/img/badge_blue.png" >
+  <img width="160" height="40" src="http://sketchrunner.com/img/badge_blue.png">
+</a>
+<a href="https://sketchpacks.com/nolastan/sync.sketchplugin/install">
+  <img width="160" height="41" src="http://sketchpacks-com.s3.amazonaws.com/assets/badges/sketchpacks-badge-install.png" >
 </a>
 
 # Sync Sketch Plugin
